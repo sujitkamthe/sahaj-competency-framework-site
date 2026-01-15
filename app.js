@@ -326,7 +326,7 @@
         // Draw level circles
         for (let i = 1; i <= levels; i++) {
             const r = (maxRadius / levels) * i;
-            html += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#e5e0d8" stroke-width="1"/>`;
+            html += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#e0e0e0" stroke-width="1"/>`;
         }
 
         // Draw axes and labels
@@ -336,7 +336,7 @@
             const y2 = cy + maxRadius * Math.sin(angleRad);
 
             // Axis line
-            html += `<line x1="${cx}" y1="${cy}" x2="${x2}" y2="${y2}" stroke="#e5e0d8" stroke-width="1"/>`;
+            html += `<line x1="${cx}" y1="${cy}" x2="${x2}" y2="${y2}" stroke="#e0e0e0" stroke-width="1"/>`;
 
             // Label
             const labelX = cx + (maxRadius + 35) * Math.cos(angleRad);
@@ -350,8 +350,7 @@
                 html += `<text x="${labelX}" y="${startY + lineIndex * lineHeight}"
                     text-anchor="middle"
                     font-size="12"
-                    font-family="Inter, sans-serif"
-                    fill="#5c564f">${line}</text>`;
+                    fill="#555">${line}</text>`;
             });
         });
 
@@ -367,7 +366,7 @@
             points += `${x},${y} `;
         });
 
-        html += `<polygon points="${points.trim()}" fill="rgba(166, 124, 91, 0.15)" stroke="#a67c5b" stroke-width="2"/>`;
+        html += `<polygon points="${points.trim()}" fill="rgba(44, 62, 80, 0.2)" stroke="#2c3e50" stroke-width="2"/>`;
 
         // Draw points
         labels.forEach((label, index) => {
@@ -375,7 +374,7 @@
             const r = maxRadius * sampleValues[index];
             const x = cx + r * Math.cos(angleRad);
             const y = cy + r * Math.sin(angleRad);
-            html += `<circle cx="${x}" cy="${y}" r="5" fill="#a67c5b"/>`;
+            html += `<circle cx="${x}" cy="${y}" r="5" fill="#2c3e50"/>`;
         });
 
         svg.innerHTML = html;
@@ -390,20 +389,20 @@
         const cx = 200;
         const cy = 200;
         const rings = [
-            { name: 'Explorer', years: '0-1 yrs', radius: 32, color: '#7c6ca7' },
-            { name: 'Artisan', years: '1-3 yrs', radius: 56, color: '#5a9a8a' },
-            { name: 'Catalyst', years: '4-8 yrs', radius: 80, color: '#5b8fb9' },
-            { name: 'Multiplier', years: '8-12 yrs', radius: 104, color: '#c4876a' },
-            { name: 'Strategist', years: '12+ yrs', radius: 128, color: '#4a4a4a' }
+            { name: 'Explorer', years: '0-1 yrs', radius: 32, color: '#6c5ce7' },
+            { name: 'Artisan', years: '1-3 yrs', radius: 56, color: '#00b894' },
+            { name: 'Catalyst', years: '4-8 yrs', radius: 80, color: '#0984e3' },
+            { name: 'Multiplier', years: '8-12 yrs', radius: 104, color: '#e17055' },
+            { name: 'Strategist', years: '12+ yrs', radius: 128, color: '#2d3436' }
         ];
 
         let html = '';
 
         // Title (centered in viewBox)
-        html += `<text x="290" y="28" text-anchor="middle" font-size="13" fill="#2c2825" font-weight="500" font-family="'Source Serif 4', Georgia, serif">
-            Layered Impact Rings
+        html += `<text x="290" y="28" text-anchor="middle" font-size="13" fill="#333" font-weight="600" font-family="Inter, sans-serif">
+            SAHAJ LAYERED IMPACT RINGS
         </text>`;
-        html += `<text x="290" y="46" text-anchor="middle" font-size="11" fill="#8a847b" font-family="Inter, sans-serif">
+        html += `<text x="290" y="46" text-anchor="middle" font-size="11" fill="#888" font-family="Inter, sans-serif">
             Explorer → Strategist
         </text>`;
 
@@ -460,7 +459,7 @@
         });
 
         // Footer text (centered in viewBox)
-        html += `<text x="290" y="380" text-anchor="middle" font-size="10" fill="#8a847b" font-style="italic" font-family="'Source Serif 4', Georgia, serif">
+        html += `<text x="290" y="380" text-anchor="middle" font-size="10" fill="#999" font-style="italic" font-family="Inter, sans-serif">
             Growth = expanding reach. Different areas mature at different speeds.
         </text>`;
 
