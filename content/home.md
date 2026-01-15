@@ -42,7 +42,7 @@ In a culture with open conversations and open salaries, expectations must be exp
 - Growth happens by **expanding impact across multiple dimensions** over time.
 - Each section includes prompting questions to help with **unbiased self-reflection**, focused on outcomes rather than effort.
 
-Most importantly, this framework is meant to support **adult conversations**—about growth, impact, and contribution—without hiding behind titles, years of experience, or vague notions of seniority.
+Most importantly, this framework is meant to support **thoughtful, self-owned conversations**—about growth, impact, and contribution—without hiding behind titles, years of experience, or vague notions of seniority.
 
 ## How the Capability Areas Work Together
 
