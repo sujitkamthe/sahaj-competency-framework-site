@@ -1,4 +1,4 @@
-// Sahaj Engineering Competency Framework - Main Application
+// The Sahaj Field Guide to Growth & Impact - Main Application
 
 (function() {
     'use strict';

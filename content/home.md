@@ -1,5 +1,5 @@
 ---
-title: Sahaj Engineering Competency Framework
+title: The Sahaj Field Guide to Growth & Impact
 tagline: Clarity without hierarchy. Impact over titles.
 ---
 
