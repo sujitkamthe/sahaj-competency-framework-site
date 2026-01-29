@@ -196,13 +196,173 @@ function parseCapabilityFile(content) {
     return capability;
 }
 
-// Parse home markdown file
+// Parse values section (h3 subsections as cards)
+function parseValuesSection(content) {
+    const cards = [];
+    const h3Regex = /^### (.+)$/gm;
+    const parts = content.split(h3Regex);
+
+    // parts[0] is content before first h3 (usually empty or heading context)
+    // parts[1] is first h3 title, parts[2] is its content, etc.
+    for (let i = 1; i < parts.length; i += 2) {
+        const title = parts[i]?.trim();
+        const body = parts[i + 1]?.trim();
+        if (title && body) {
+            cards.push({ title, description: body });
+        }
+    }
+    return cards;
+}
+
+// Parse usage section (list items + final paragraph as highlight)
+function parseUsageSection(content) {
+    const items = [];
+    const lines = content.split('\n');
+    let highlight = '';
+    let lastNonEmptyLine = '';
+
+    for (const line of lines) {
+        const trimmed = line.trim();
+        if (trimmed.startsWith('- ')) {
+            items.push(trimmed.substring(2).trim());
+        } else if (trimmed && !trimmed.startsWith('#')) {
+            lastNonEmptyLine = trimmed;
+        }
+    }
+
+    // The last non-list paragraph is the highlight
+    if (lastNonEmptyLine && !lastNonEmptyLine.startsWith('- ')) {
+        highlight = lastNonEmptyLine;
+    }
+
+    return { items, highlight };
+}
+
+// Parse a section with list items
+function parseListSection(content) {
+    const items = [];
+    const lines = content.split('\n');
+
+    for (const line of lines) {
+        const trimmed = line.trim();
+        if (trimmed.startsWith('- ')) {
+            items.push(trimmed.substring(2).trim());
+        }
+    }
+    return items;
+}
+
+// Parse a section with paragraphs
+function parseParagraphSection(content) {
+    const paragraphs = [];
+    const lines = content.split('\n');
+    let currentParagraph = '';
+
+    for (const line of lines) {
+        const trimmed = line.trim();
+        if (trimmed === '') {
+            if (currentParagraph) {
+                paragraphs.push(currentParagraph);
+                currentParagraph = '';
+            }
+        } else if (!trimmed.startsWith('#')) {
+            currentParagraph += (currentParagraph ? ' ' : '') + trimmed;
+        }
+    }
+    if (currentParagraph) {
+        paragraphs.push(currentParagraph);
+    }
+    return paragraphs;
+}
+
+// Parse home markdown file into structured data
 function parseHomeFile(content) {
     const { frontmatter, body } = parseFrontmatter(content);
-    return {
-        ...frontmatter,
-        content: body
+
+    const home = {
+        title: frontmatter.title,
+        tagline: frontmatter.tagline,
+        sections: {},
+        exploreCards: [
+            { title: 'Personas', description: 'Understand how impact evolves from Explorer to Strategist', page: 'personas' },
+            { title: 'Capability Areas', description: 'Explore the five dimensions of engineering impact', page: 'capabilities' }
+        ]
     };
+
+    // Split body by h2 headers
+    const h2Regex = /^## (.+)$/gm;
+    const parts = body.split(h2Regex);
+
+    // Build a map of section name -> content
+    const sectionMap = {};
+    for (let i = 1; i < parts.length; i += 2) {
+        const heading = parts[i]?.trim();
+        const sectionContent = parts[i + 1];
+        if (heading && sectionContent) {
+            sectionMap[heading] = sectionContent;
+        }
+    }
+
+    // Parse each section into structured data
+    if (sectionMap['How to Read These Expectations']) {
+        home.sections.intro = {
+            heading: 'How to Read These Expectations',
+            paragraphs: parseParagraphSection(sectionMap['How to Read These Expectations'])
+        };
+    }
+
+    if (sectionMap['What We Value']) {
+        home.sections.values = {
+            heading: 'What We Value',
+            cards: parseValuesSection(sectionMap['What We Value'])
+        };
+    }
+
+    if (sectionMap['How to Use This Framework']) {
+        const usage = parseUsageSection(sectionMap['How to Use This Framework']);
+        home.sections.usage = {
+            heading: 'How to Use This Framework',
+            items: usage.items,
+            highlight: usage.highlight
+        };
+    }
+
+    if (sectionMap['How the Capability Areas Work Together']) {
+        home.sections.balance = {
+            heading: 'How the Capability Areas Work Together',
+            paragraphs: parseParagraphSection(sectionMap['How the Capability Areas Work Together'])
+        };
+    }
+
+    if (sectionMap['Key Truths']) {
+        home.sections.keyTruths = {
+            heading: 'Key Truths',
+            items: parseListSection(sectionMap['Key Truths'])
+        };
+    }
+
+    if (sectionMap['Who This Guide Is For']) {
+        home.sections.whoFor = {
+            heading: 'Who This Guide Is For',
+            paragraphs: parseParagraphSection(sectionMap['Who This Guide Is For'])
+        };
+    }
+
+    if (sectionMap['How to Self-Assess Honestly']) {
+        home.sections.selfAssess = {
+            heading: 'How to Self-Assess Honestly',
+            items: parseListSection(sectionMap['How to Self-Assess Honestly'])
+        };
+    }
+
+    if (sectionMap['Explicit Growth Principle']) {
+        home.sections.growthPrinciple = {
+            heading: 'Explicit Growth Principle',
+            paragraphs: parseParagraphSection(sectionMap['Explicit Growth Principle'])
+        };
+    }
+
+    return home;
 }
 
 // Main build function
@@ -294,6 +454,8 @@ function build() {
     const output = `// The Sahaj Field Guide to Growth & Impact - Generated Data
 // This file is auto-generated by build.js. Do not edit directly.
 // To update content, edit the Markdown files in the content/ directory and run: node build.js
+
+const HOME = ${JSON.stringify(data.home, null, 2)};
 
 const PERSONAS = ${JSON.stringify(data.personas, null, 2)};
 

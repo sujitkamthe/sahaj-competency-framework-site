@@ -69,7 +69,9 @@
         const targetPage = document.getElementById(pageId);
         if (targetPage) {
             // If it's a detail page that needs rendering, render it first
-            if (pageId.startsWith('persona-') && targetPage.innerHTML.trim() === '') {
+            if (pageId === 'home' && targetPage.innerHTML.trim() === '') {
+                renderHomePage(targetPage);
+            } else if (pageId.startsWith('persona-') && targetPage.innerHTML.trim() === '') {
                 const personaId = pageId.replace('persona-', '');
                 renderPersonaDetailPage(personaId, targetPage);
             } else if (pageId.startsWith('capability-') && targetPage.innerHTML.trim() === '') {
@@ -94,6 +96,150 @@
         } else if (pageId === 'capabilities') {
             renderCapabilityRadar();
         }
+    }
+
+    // ============================================
+    // Inline Markdown Parser
+    // ============================================
+
+    function parseInlineMarkdown(text) {
+        return text
+            .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*([^*]+)\*/g, '<em>$1</em>');
+    }
+
+    // ============================================
+    // Home Page Rendering
+    // ============================================
+
+    function renderHomePage(container) {
+        const home = HOME;
+        if (!home) return;
+
+        let html = `
+            <div class="hero">
+                <h1>${home.title}</h1>
+                <p class="tagline">${home.tagline}</p>
+            </div>
+
+            <div class="container">
+        `;
+
+        // Intro section
+        if (home.sections.intro) {
+            html += `
+                <section class="intro-section">
+                    <h2>${home.sections.intro.heading}</h2>
+                    ${home.sections.intro.paragraphs.map(p => `<p>${parseInlineMarkdown(p)}</p>`).join('')}
+                </section>
+            `;
+        }
+
+        // Values section
+        if (home.sections.values) {
+            html += `
+                <section class="values-section">
+                    <h2>${home.sections.values.heading}</h2>
+                    <div class="values-grid">
+                        ${home.sections.values.cards.map(card => `
+                            <div class="value-card">
+                                <h3>${card.title}</h3>
+                                <p>${parseInlineMarkdown(card.description)}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </section>
+            `;
+        }
+
+        // Usage section
+        if (home.sections.usage) {
+            html += `
+                <section class="usage-section">
+                    <h2>${home.sections.usage.heading}</h2>
+                    <ul class="usage-list">
+                        ${home.sections.usage.items.map(item => `<li>${parseInlineMarkdown(item)}</li>`).join('')}
+                    </ul>
+                    ${home.sections.usage.highlight ? `<p class="highlight-box">${parseInlineMarkdown(home.sections.usage.highlight)}</p>` : ''}
+                </section>
+            `;
+        }
+
+        // Balance section (How the Capability Areas Work Together)
+        if (home.sections.balance) {
+            html += `
+                <section class="balance-section">
+                    <h2>${home.sections.balance.heading}</h2>
+                    ${home.sections.balance.paragraphs.map(p => `<p>${parseInlineMarkdown(p)}</p>`).join('')}
+                </section>
+            `;
+        }
+
+        // Key Truths section
+        if (home.sections.keyTruths) {
+            html += `
+                <section class="key-truths-section">
+                    <h2>${home.sections.keyTruths.heading}</h2>
+                    <ul class="key-truths-list">
+                        ${home.sections.keyTruths.items.map(item => `<li>${parseInlineMarkdown(item)}</li>`).join('')}
+                    </ul>
+                </section>
+            `;
+        }
+
+        // Who This Guide Is For section
+        if (home.sections.whoFor) {
+            html += `
+                <section class="who-for-section">
+                    <h2>${home.sections.whoFor.heading}</h2>
+                    ${home.sections.whoFor.paragraphs.map(p => `<p>${parseInlineMarkdown(p)}</p>`).join('')}
+                </section>
+            `;
+        }
+
+        // Self-Assess section
+        if (home.sections.selfAssess) {
+            html += `
+                <section class="self-assess-section">
+                    <h2>${home.sections.selfAssess.heading}</h2>
+                    <ul class="self-assess-list">
+                        ${home.sections.selfAssess.items.map(item => `<li>${parseInlineMarkdown(item)}</li>`).join('')}
+                    </ul>
+                </section>
+            `;
+        }
+
+        // Growth Principle section
+        if (home.sections.growthPrinciple) {
+            html += `
+                <section class="growth-principle-section">
+                    <h2>${home.sections.growthPrinciple.heading}</h2>
+                    ${home.sections.growthPrinciple.paragraphs.map(p => `<p class="highlight-box">${parseInlineMarkdown(p)}</p>`).join('')}
+                </section>
+            `;
+        }
+
+        // Explore cards section
+        if (home.exploreCards && home.exploreCards.length > 0) {
+            html += `
+                <section class="explore-section">
+                    <h2>Explore the Framework</h2>
+                    <div class="explore-grid">
+                        ${home.exploreCards.map(card => `
+                            <a href="#${card.page}" data-page="${card.page}" class="explore-card">
+                                <h3>${card.title}</h3>
+                                <p>${card.description}</p>
+                                <span class="arrow">→</span>
+                            </a>
+                        `).join('')}
+                    </div>
+                </section>
+            `;
+        }
+
+        html += `</div>`;
+
+        container.innerHTML = html;
     }
 
     // ============================================
