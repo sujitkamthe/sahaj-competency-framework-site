@@ -20,6 +20,14 @@ This reads Markdown files from `content/` and generates `data.js`. No external d
 2. Run `node build.js` to regenerate `data.js`
 3. Open `index.html` in a browser (no server required)
 
+### Dev Server (watch + live reload)
+
+```bash
+npm run dev
+```
+
+This watches `content/*.md` for changes, rebuilds `data.js` automatically, and serves the site at `http://localhost:8080` with live reload.
+
 ## Architecture
 
 **Content Pipeline:**

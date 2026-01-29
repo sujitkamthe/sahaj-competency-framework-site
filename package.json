@@ -1,0 +1,8 @@
+{
+  "name": "sahaj-competency-framework-site",
+  "private": true,
+  "scripts": {
+    "build": "node build.js",
+    "dev": "npx concurrently --kill-others \"npx nodemon --watch content -e md --exec 'node build.js'\" \"npx live-server --watch=data.js\""
+  }
+}
