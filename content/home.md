@@ -1,5 +1,5 @@
 ---
-title: The Sahaj Field Guide to Growth & Impact
+title: The Field Guide to Growth & Impact
 tagline: Clarity without hierarchy. Impact over titles.
 ---
 

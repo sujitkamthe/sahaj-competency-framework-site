@@ -1,4 +1,4 @@
-// The Sahaj Field Guide to Growth & Impact - Main Application
+// The Field Guide to Growth & Impact - Main Application
 
 (function() {
     'use strict';
