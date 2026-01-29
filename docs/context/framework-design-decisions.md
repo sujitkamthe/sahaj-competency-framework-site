@@ -317,21 +317,28 @@ It means:
 - But your impact is amplified through additional actions (direction-setting, raising the bar for others)
 - It's additive, not replacement
 
+## Resolved: Capability Equality and Uneven Growth
+
+**Question:** Do all five capabilities apply equally? Can someone be "spikey"?
+
+**Resolution:**
+- All five capabilities matter at all levels
+- You can be spikey, but **your weakest capability sets your ceiling**
+- If you're Artisan at Technical but Explorer at Consulting, you're an Explorer overall
+- Gaps are harder to see at early levels (smaller scope, lower stakes)
+- Around Catalyst level, gaps become obvious — you're shaping direction, working with stakeholders, leading others
+
+**Implication:** No complex "primary/secondary" system needed. The principle is simple: lowest capability determines persona.
+
 ---
 
 ## Open Concerns (Unresolved)
 
-1. **Uneven growth across capabilities**: How to handle someone who is Catalyst-level in one area, Artisan in another? No single approach decided yet.
+1. **Non-people-leadership scaling**: How do ICs scale impact without leading teams? Need to articulate valid paths (platforms, tooling, standards, external influence).
 
-2. **Non-people-leadership scaling**: How do ICs scale impact without leading teams? Need to articulate valid paths (platforms, tooling, standards, external influence).
+2. **Checkboxism risk**: Even with good language, people may treat the framework as a checklist. Need to continuously reinforce the reflective intent.
 
-3. **Checkboxism risk**: Even with good language, people may treat the framework as a checklist. Need to continuously reinforce the reflective intent.
-
-4. **Years-of-experience removal**: Removing years is decided. Replacement anchors (scope, contribution type, trusted questions) need to be integrated into content.
-
-5. **Calibration bias**: Group calibration may favor visible/high-profile work. Need mechanisms to surface important-but-invisible contributions.
-
-6. **Reframe Consulting language** (task `adt`): Current language ("clearest differentiator") sounds like Consulting > other capabilities. Should clarify it's about calibration difficulty, not importance.
+3. **Calibration bias**: Group calibration may favor visible/high-profile work. Need mechanisms to surface important-but-invisible contributions.
 
 ---
 
