@@ -7,6 +7,35 @@
     // Navigation
     // ============================================
 
+    function populateNavDropdowns() {
+        const capabilityIcons = {
+            technical: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg>',
+            consulting: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r=".5"/></svg>',
+            delivery: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>',
+            mentorship: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+            communication: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'
+        };
+
+        // Populate personas dropdown
+        const personasDropdown = document.getElementById('personas-dropdown');
+        if (personasDropdown) {
+            personasDropdown.innerHTML = PERSONA_ORDER.map(id => {
+                const persona = PERSONAS[id];
+                return `<li><a href="#persona-${id}" data-page="persona-${id}" class="persona-link">${persona.name}</a></li>`;
+            }).join('');
+        }
+
+        // Populate capabilities dropdown
+        const capabilitiesDropdown = document.getElementById('capabilities-dropdown');
+        if (capabilitiesDropdown) {
+            capabilitiesDropdown.innerHTML = CAPABILITY_ORDER.map(id => {
+                const cap = CAPABILITIES[id];
+                const icon = capabilityIcons[id] || '';
+                return `<li><a href="#capability-${id}" data-page="capability-${id}" class="capability-link"><span class="cap-icon">${icon}</span>${cap.name}</a></li>`;
+            }).join('');
+        }
+    }
+
     function initNavigation() {
         // Handle all navigation clicks
         document.addEventListener('click', function(e) {
@@ -68,9 +97,17 @@
         // Show target page
         const targetPage = document.getElementById(pageId);
         if (targetPage) {
-            // If it's a detail page that needs rendering, render it first
+            // If it's a page that needs rendering, render it first
             if (pageId === 'home' && targetPage.innerHTML.trim() === '') {
                 renderHomePage(targetPage);
+            } else if (pageId === 'personas' && targetPage.innerHTML.trim() === '') {
+                renderPersonasOverviewPage(targetPage);
+            } else if (pageId === 'capabilities' && targetPage.innerHTML.trim() === '') {
+                renderCapabilitiesOverviewPage(targetPage);
+            } else if (pageId === 'self-assessment' && targetPage.innerHTML.trim() === '') {
+                renderSelfAssessmentPage(targetPage);
+            } else if (pageId === 'anti-patterns' && targetPage.innerHTML.trim() === '') {
+                renderAntiPatternsPage(targetPage);
             } else if (pageId.startsWith('persona-') && targetPage.innerHTML.trim() === '') {
                 const personaId = pageId.replace('persona-', '');
                 renderPersonaDetailPage(personaId, targetPage);
@@ -106,6 +143,99 @@
         return text
             .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
             .replace(/\*([^*]+)\*/g, '<em>$1</em>');
+    }
+
+    // ============================================
+    // Markdown to HTML Parser
+    // ============================================
+
+    function parseMarkdownToHtml(markdown) {
+        const lines = markdown.split('\n');
+        let html = '';
+        let inList = false;
+        let inTable = false;
+        let tableRows = [];
+
+        for (let i = 0; i < lines.length; i++) {
+            let line = lines[i];
+
+            // Close list if we're no longer in one
+            if (inList && !line.trim().startsWith('- ')) {
+                html += '</ul>\n';
+                inList = false;
+            }
+
+            // Close table if we're no longer in one
+            if (inTable && !line.trim().startsWith('|')) {
+                html += renderTable(tableRows);
+                tableRows = [];
+                inTable = false;
+            }
+
+            // Headers
+            if (line.startsWith('##### ')) {
+                html += `<h5>${parseInlineMarkdown(line.substring(6))}</h5>\n`;
+            } else if (line.startsWith('#### ')) {
+                html += `<h4>${parseInlineMarkdown(line.substring(5))}</h4>\n`;
+            } else if (line.startsWith('### ')) {
+                html += `<h3>${parseInlineMarkdown(line.substring(4))}</h3>\n`;
+            } else if (line.startsWith('## ')) {
+                html += `<h2>${parseInlineMarkdown(line.substring(3))}</h2>\n`;
+            }
+            // Blockquotes
+            else if (line.startsWith('> ')) {
+                html += `<blockquote><p>${parseInlineMarkdown(line.substring(2))}</p></blockquote>\n`;
+            }
+            // List items
+            else if (line.trim().startsWith('- ')) {
+                if (!inList) {
+                    html += '<ul>\n';
+                    inList = true;
+                }
+                html += `<li>${parseInlineMarkdown(line.trim().substring(2))}</li>\n`;
+            }
+            // Table rows
+            else if (line.trim().startsWith('|')) {
+                inTable = true;
+                tableRows.push(line.trim());
+            }
+            // Paragraphs (non-empty lines that aren't special)
+            else if (line.trim() !== '') {
+                html += `<p>${parseInlineMarkdown(line)}</p>\n`;
+            }
+        }
+
+        // Close any open list
+        if (inList) {
+            html += '</ul>\n';
+        }
+
+        // Close any open table
+        if (inTable) {
+            html += renderTable(tableRows);
+        }
+
+        return html;
+    }
+
+    function renderTable(rows) {
+        if (rows.length < 2) return '';
+
+        const parseRow = (row) => row.split('|').filter(cell => cell.trim() !== '').map(cell => cell.trim());
+        const headers = parseRow(rows[0]);
+        // Skip separator row (row[1])
+        const dataRows = rows.slice(2).map(parseRow);
+
+        let html = '<table>\n<thead>\n<tr>\n';
+        headers.forEach(h => html += `<th>${parseInlineMarkdown(h)}</th>\n`);
+        html += '</tr>\n</thead>\n<tbody>\n';
+        dataRows.forEach(row => {
+            html += '<tr>\n';
+            row.forEach(cell => html += `<td>${parseInlineMarkdown(cell)}</td>\n`);
+            html += '</tr>\n';
+        });
+        html += '</tbody>\n</table>\n';
+        return html;
     }
 
     // ============================================
@@ -248,6 +378,139 @@
 
         html += `</div>`;
 
+        container.innerHTML = html;
+    }
+
+    // ============================================
+    // Personas Overview Page Rendering
+    // ============================================
+
+    function renderPersonasOverviewPage(container) {
+        const page = PERSONAS_PAGE || {};
+        const introText = page.intro || '';
+        let html = `
+            <div class="container">
+                <h1>${page.title || 'Personas'}</h1>
+                ${introText ? `<p class="page-intro">${parseInlineMarkdown(introText)}</p>` : ''}
+
+                <div class="diagram-container">
+                    <svg id="impact-rings" viewBox="0 0 580 400" class="impact-rings-svg">
+                        <!-- Will be populated by JS -->
+                    </svg>
+                </div>
+
+                <div class="personas-grid">
+        `;
+
+        PERSONA_ORDER.forEach(personaId => {
+            const persona = PERSONAS[personaId];
+            html += `
+                <a href="#persona-${persona.id}" data-page="persona-${persona.id}" class="persona-card persona-${persona.id}">
+                    <div class="persona-scope">${persona.scope}</div>
+                    <h3>${persona.name}</h3>
+                    <p class="persona-tagline">${persona.tagline}</p>
+                    <p class="persona-mindset">"${persona.mindset}"</p>
+                </a>
+            `;
+        });
+
+        html += `
+                </div>
+            </div>
+        `;
+
+        container.innerHTML = html;
+    }
+
+    // ============================================
+    // Capabilities Overview Page Rendering
+    // ============================================
+
+    function renderCapabilitiesOverviewPage(container) {
+        const capabilityIcons = {
+            technical: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg>',
+            consulting: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r=".5" fill="currentColor"/></svg>',
+            delivery: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>',
+            mentorship: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+            communication: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'
+        };
+
+        const page = CAPABILITIES_PAGE || {};
+        const introText = page.intro || '';
+        let html = `
+            <div class="container">
+                <h1>${page.title || 'Capability Areas'}</h1>
+                ${introText ? `<p class="page-intro">${parseInlineMarkdown(introText)}</p>` : ''}
+
+                <div class="diagram-container">
+                    <svg id="capability-radar" viewBox="0 0 500 450" class="radar-svg">
+                        <!-- Will be populated by JS -->
+                    </svg>
+                    ${page.diagramCaption ? `<p class="diagram-caption">${parseInlineMarkdown(page.diagramCaption)}</p>` : ''}
+                </div>
+
+                <div class="capabilities-grid">
+        `;
+
+        CAPABILITY_ORDER.forEach(capId => {
+            const cap = CAPABILITIES[capId];
+            html += `
+                <a href="#capability-${cap.id}" data-page="capability-${cap.id}" class="capability-card">
+                    <div class="capability-icon">${capabilityIcons[cap.id] || ''}</div>
+                    <h3>${cap.name}</h3>
+                    <p class="capability-question">${cap.question}</p>
+                    <p>${cap.description}</p>
+                </a>
+            `;
+        });
+
+        html += `
+                </div>
+
+                <section class="balance-section">
+                    <h2>How the Capability Areas Work Together</h2>
+                    <p>No single capability area is sufficient on its own.</p>
+                    <ul class="balance-list">
+                        <li>Strong <strong>Technical Delivery</strong> without Consulting leads to execution-only roles</li>
+                        <li>Strong <strong>Consulting</strong> without Technical depth erodes trust</li>
+                        <li>Strong <strong>Delivery</strong> without Mentorship creates bottlenecks</li>
+                        <li>Strong <strong>Influence</strong> without substance creates noise</li>
+                    </ul>
+                    <p>Sustainable growth at Sahaj comes from <strong>balanced expansion across capability areas over time</strong>, with different capability areas becoming more prominent at different stages.</p>
+                </section>
+            </div>
+        `;
+
+        container.innerHTML = html;
+    }
+
+    // ============================================
+    // Self-Assessment Page Rendering
+    // ============================================
+
+    function renderSelfAssessmentPage(container) {
+        const page = SELF_ASSESSMENT_PAGE || {};
+        let html = `
+            <div class="container self-assessment-page">
+                <h1>${page.title || 'Self-Assessment'}</h1>
+                ${page.content ? parseMarkdownToHtml(page.content) : ''}
+            </div>
+        `;
+        container.innerHTML = html;
+    }
+
+    // ============================================
+    // Anti-Patterns Page Rendering
+    // ============================================
+
+    function renderAntiPatternsPage(container) {
+        const page = ANTI_PATTERNS_PAGE || {};
+        let html = `
+            <div class="container anti-patterns-page">
+                <h1>${page.title || 'Anti-Patterns'}</h1>
+                ${page.content ? parseMarkdownToHtml(page.content) : ''}
+            </div>
+        `;
         container.innerHTML = html;
     }
 
@@ -669,6 +932,7 @@
     // ============================================
 
     document.addEventListener('DOMContentLoaded', function() {
+        populateNavDropdowns();
         initNavigation();
         initDarkMode();
 
