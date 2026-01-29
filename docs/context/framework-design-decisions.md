@@ -2,6 +2,22 @@
 
 This document captures design decisions and organizational context for the Sahaj competency framework. Not part of the public website.
 
+## What Sahaj Is
+
+Sahaj is a custom software development shop that focuses on building products for clients. This shapes what capabilities matter:
+
+| Business Need | Capability |
+|---------------|------------|
+| Build the right thing | Consulting |
+| Build the thing right | Technical Delivery |
+| Build it reliably | Delivery Excellence |
+| Keep building (talent pipeline) | Mentorship & Talent Growth |
+| Extend impact beyond immediate work | Communication & Influence |
+
+All five are essential. None can be weak at senior levels.
+
+---
+
 ## Why This Framework Exists
 
 Sahaj is an open org with open feedback. Without a shared structure:
@@ -270,6 +286,39 @@ For those outside the framework's current scope:
 
 ---
 
+## Resolved: Why Consulting Is Called Out
+
+**Misconception:** Consulting is the most important capability / the growth lever.
+
+**Reality:** All five capabilities matter equally and scale together. Consulting is emphasized because:
+- It's where people most often fool themselves
+- Everyone thinks they consult; few actually do
+- Self-assessment is most unreliable here
+
+**Implication:** The "clearest differentiator" language should be reframed. It's not about Consulting being more important — it's about Consulting being where calibration fails most often.
+
+## Resolved: Order-Taking vs. Clarity Ownership
+
+"Growth at Sahaj requires moving from order-taking to problem ownership" doesn't mean:
+- Sahaj has a hierarchy where seniors give orders to juniors
+
+It means:
+- Early on, others share clarity with you (context, direction, approach)
+- The expectation is you build your own clarity quickly
+- "Order-taking" (waiting to be told what to do) doesn't work at Sahaj — even for new joiners
+
+## Resolved: Technical Delivery at Senior Levels
+
+"At higher levels, this shifts from writing great code to setting technical direction" doesn't mean:
+- You stop writing code
+
+It means:
+- You still write code
+- But your impact is amplified through additional actions (direction-setting, raising the bar for others)
+- It's additive, not replacement
+
+---
+
 ## Open Concerns (Unresolved)
 
 1. **Uneven growth across capabilities**: How to handle someone who is Catalyst-level in one area, Artisan in another? No single approach decided yet.
@@ -281,6 +330,8 @@ For those outside the framework's current scope:
 4. **Years-of-experience removal**: Removing years is decided. Replacement anchors (scope, contribution type, trusted questions) need to be integrated into content.
 
 5. **Calibration bias**: Group calibration may favor visible/high-profile work. Need mechanisms to surface important-but-invisible contributions.
+
+6. **Reframe Consulting language** (task `adt`): Current language ("clearest differentiator") sounds like Consulting > other capabilities. Should clarify it's about calibration difficulty, not importance.
 
 ---
 
