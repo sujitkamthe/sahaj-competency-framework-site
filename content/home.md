@@ -44,21 +44,6 @@ In a culture with open conversations and open salaries, expectations must be exp
 
 Most importantly, this framework is meant to support **thoughtful, self-owned conversations**—about growth, impact, and contribution—without hiding behind titles, years of experience, or vague notions of seniority.
 
-## How the Capability Areas Work Together
-
-No single capability area is sufficient on its own.
-
-- Strong **Technical Delivery** without Consulting leads to execution-only roles
-- Strong **Consulting** without Technical depth erodes trust
-- Strong **Delivery** without Mentorship creates bottlenecks
-- Strong **Influence** without substance creates noise
-
-Sustainable growth at Sahaj comes from **balanced expansion across capability areas over time**, with different capability areas becoming more prominent at different stages.
-
-**Your weakest capability sets your ceiling.** If you demonstrate Artisan-level Technical Delivery but Explorer-level Consulting, you're operating as an Explorer overall — not an Artisan with a gap.
-
-Early on, gaps are hard to see — the scope is smaller, the stakes are lower. Around Catalyst level, gaps become obvious. You're shaping direction, working with stakeholders, leading others. Blind spots show.
-
 ## Key Truths
 
 - Delivery-only excellence has a **growth ceiling**

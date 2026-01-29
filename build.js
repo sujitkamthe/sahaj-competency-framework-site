@@ -444,9 +444,14 @@ function parseCapabilitiesPage(content) {
     // Look for Diagram Caption section
     for (let i = 1; i < parts.length; i += 2) {
         const heading = parts[i]?.trim();
-        const content = parts[i + 1]?.trim();
-        if (heading === 'Diagram Caption' && content) {
-            page.diagramCaption = content;
+        const sectionContent = parts[i + 1]?.trim();
+        if (heading === 'Diagram Caption' && sectionContent) {
+            page.diagramCaption = sectionContent;
+        } else if (heading === 'How the Capability Areas Work Together' && sectionContent) {
+            page.balance = {
+                heading: heading,
+                blocks: parseMixedSection(sectionContent)
+            };
         }
     }
 

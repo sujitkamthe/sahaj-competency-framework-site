@@ -471,18 +471,28 @@
 
         html += `
                 </div>
+        `;
 
+        // Balance section (How the Capability Areas Work Together)
+        if (page.balance) {
+            const balanceContent = page.balance.blocks.map(block => {
+                if (block.type === 'paragraph') {
+                    return `<p>${parseInlineMarkdown(block.content)}</p>`;
+                } else if (block.type === 'list') {
+                    return `<ul class="balance-list">${block.items.map(item => `<li>${parseInlineMarkdown(item)}</li>`).join('')}</ul>`;
+                }
+                return '';
+            }).join('');
+
+            html += `
                 <section class="balance-section">
-                    <h2>How the Capability Areas Work Together</h2>
-                    <p>No single capability area is sufficient on its own.</p>
-                    <ul class="balance-list">
-                        <li>Strong <strong>Technical Delivery</strong> without Consulting leads to execution-only roles</li>
-                        <li>Strong <strong>Consulting</strong> without Technical depth erodes trust</li>
-                        <li>Strong <strong>Delivery</strong> without Mentorship creates bottlenecks</li>
-                        <li>Strong <strong>Influence</strong> without substance creates noise</li>
-                    </ul>
-                    <p>Sustainable growth at Sahaj comes from <strong>balanced expansion across capability areas over time</strong>, with different capability areas becoming more prominent at different stages.</p>
+                    <h2>${page.balance.heading}</h2>
+                    ${balanceContent}
                 </section>
+            `;
+        }
+
+        html += `
             </div>
         `;
 
