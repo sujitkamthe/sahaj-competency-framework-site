@@ -275,6 +275,46 @@ function parseParagraphSection(content) {
     return paragraphs;
 }
 
+// Parse a section with mixed content (paragraphs and lists)
+function parseMixedSection(content) {
+    const blocks = [];
+    const lines = content.split('\n');
+    let currentParagraph = '';
+    let currentList = [];
+
+    function flushParagraph() {
+        if (currentParagraph) {
+            blocks.push({ type: 'paragraph', content: currentParagraph });
+            currentParagraph = '';
+        }
+    }
+
+    function flushList() {
+        if (currentList.length > 0) {
+            blocks.push({ type: 'list', items: currentList });
+            currentList = [];
+        }
+    }
+
+    for (const line of lines) {
+        const trimmed = line.trim();
+        if (trimmed === '') {
+            flushParagraph();
+            flushList();
+        } else if (trimmed.startsWith('- ')) {
+            flushParagraph();
+            currentList.push(trimmed.substring(2).trim());
+        } else if (!trimmed.startsWith('#')) {
+            flushList();
+            currentParagraph += (currentParagraph ? ' ' : '') + trimmed;
+        }
+    }
+    flushParagraph();
+    flushList();
+
+    return blocks;
+}
+
 // Parse home markdown file into structured data
 function parseHomeFile(content) {
     const { frontmatter, body } = parseFrontmatter(content);
@@ -330,7 +370,7 @@ function parseHomeFile(content) {
     if (sectionMap['How the Capability Areas Work Together']) {
         home.sections.balance = {
             heading: 'How the Capability Areas Work Together',
-            paragraphs: parseParagraphSection(sectionMap['How the Capability Areas Work Together'])
+            blocks: parseMixedSection(sectionMap['How the Capability Areas Work Together'])
         };
     }
 

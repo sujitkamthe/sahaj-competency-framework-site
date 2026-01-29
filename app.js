@@ -167,10 +167,19 @@
 
         // Balance section (How the Capability Areas Work Together)
         if (home.sections.balance) {
+            const balanceContent = home.sections.balance.blocks.map(block => {
+                if (block.type === 'paragraph') {
+                    return `<p>${parseInlineMarkdown(block.content)}</p>`;
+                } else if (block.type === 'list') {
+                    return `<ul class="balance-list">${block.items.map(item => `<li>${parseInlineMarkdown(item)}</li>`).join('')}</ul>`;
+                }
+                return '';
+            }).join('');
+
             html += `
                 <section class="balance-section">
                     <h2>${home.sections.balance.heading}</h2>
-                    ${home.sections.balance.paragraphs.map(p => `<p>${parseInlineMarkdown(p)}</p>`).join('')}
+                    ${balanceContent}
                 </section>
             `;
         }

@@ -54,12 +54,32 @@ const HOME = {
     },
     "balance": {
       "heading": "How the Capability Areas Work Together",
-      "paragraphs": [
-        "No single capability area is sufficient on its own.",
-        "- Strong **Technical Delivery** without Consulting leads to execution-only roles - Strong **Consulting** without Technical depth erodes trust - Strong **Delivery** without Mentorship creates bottlenecks - Strong **Influence** without substance creates noise",
-        "Sustainable growth at Sahaj comes from **balanced expansion across capability areas over time**, with different capability areas becoming more prominent at different stages.",
-        "**Your weakest capability sets your ceiling.** If you demonstrate Artisan-level Technical Delivery but Explorer-level Consulting, you're operating as an Explorer overall — not an Artisan with a gap.",
-        "Early on, gaps are hard to see — the scope is smaller, the stakes are lower. Around Catalyst level, gaps become obvious. You're shaping direction, working with stakeholders, leading others. Blind spots show."
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "No single capability area is sufficient on its own."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Strong **Technical Delivery** without Consulting leads to execution-only roles",
+            "Strong **Consulting** without Technical depth erodes trust",
+            "Strong **Delivery** without Mentorship creates bottlenecks",
+            "Strong **Influence** without substance creates noise"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Sustainable growth at Sahaj comes from **balanced expansion across capability areas over time**, with different capability areas becoming more prominent at different stages."
+        },
+        {
+          "type": "paragraph",
+          "content": "**Your weakest capability sets your ceiling.** If you demonstrate Artisan-level Technical Delivery but Explorer-level Consulting, you're operating as an Explorer overall — not an Artisan with a gap."
+        },
+        {
+          "type": "paragraph",
+          "content": "Early on, gaps are hard to see — the scope is smaller, the stakes are lower. Around Catalyst level, gaps become obvious. You're shaping direction, working with stakeholders, leading others. Blind spots show."
+        }
       ]
     },
     "keyTruths": {
