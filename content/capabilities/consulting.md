@@ -27,8 +27,8 @@ Others actively shape what should be built and why.
 
 Both are valuable — but they are not the same kind of impact.
 
-Growth at Sahaj requires moving from order-taking to problem ownership.
+Growth at Sahaj requires moving from receiving clarity to building your own. Early on, others share context and direction. The expectation is that you build your own clarity quickly.
 
 ## Note
 
-This bucket is the clearest differentiator between delivery-only contribution and consulting-led impact. Many people believe they are doing consulting; the bullets below make it very hard to claim that without evidence.
+This capability requires concrete evidence. The expectations below describe what Consulting looks like in practice — use them to reflect honestly.
