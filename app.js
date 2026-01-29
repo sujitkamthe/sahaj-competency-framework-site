@@ -4,17 +4,31 @@
     'use strict';
 
     // ============================================
+    // Shared Constants
+    // ============================================
+
+    const CAPABILITY_ICONS = {
+        technical: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg>',
+        consulting: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r=".5"/></svg>',
+        delivery: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>',
+        mentorship: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+        communication: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'
+    };
+
+    // Large icons for capability cards (32x32)
+    const CAPABILITY_ICONS_LARGE = {
+        technical: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg>',
+        consulting: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r=".5" fill="currentColor"/></svg>',
+        delivery: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>',
+        mentorship: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+        communication: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'
+    };
+
+    // ============================================
     // Navigation
     // ============================================
 
     function populateNavDropdowns() {
-        const capabilityIcons = {
-            technical: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg>',
-            consulting: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r=".5"/></svg>',
-            delivery: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>',
-            mentorship: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
-            communication: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'
-        };
 
         // Populate personas dropdown
         const personasDropdown = document.getElementById('personas-dropdown');
@@ -30,8 +44,7 @@
         if (capabilitiesDropdown) {
             capabilitiesDropdown.innerHTML = CAPABILITY_ORDER.map(id => {
                 const cap = CAPABILITIES[id];
-                const icon = capabilityIcons[id] || '';
-                return `<li><a href="#capability-${id}" data-page="capability-${id}" class="capability-link"><span class="cap-icon">${icon}</span>${cap.name}</a></li>`;
+                return `<li><a href="#capability-${id}" data-page="capability-${id}" class="capability-link"><span class="cap-icon">${CAPABILITY_ICONS[id] || ''}</span>${cap.name}</a></li>`;
             }).join('');
         }
     }
@@ -105,9 +118,9 @@
             } else if (pageId === 'capabilities' && targetPage.innerHTML.trim() === '') {
                 renderCapabilitiesOverviewPage(targetPage);
             } else if (pageId === 'self-assessment' && targetPage.innerHTML.trim() === '') {
-                renderSelfAssessmentPage(targetPage);
+                renderMarkdownPage(targetPage, SELF_ASSESSMENT_PAGE, 'self-assessment-page');
             } else if (pageId === 'anti-patterns' && targetPage.innerHTML.trim() === '') {
-                renderAntiPatternsPage(targetPage);
+                renderMarkdownPage(targetPage, ANTI_PATTERNS_PAGE, 'anti-patterns-page');
             } else if (pageId.startsWith('persona-') && targetPage.innerHTML.trim() === '') {
                 const personaId = pageId.replace('persona-', '');
                 renderPersonaDetailPage(personaId, targetPage);
@@ -427,14 +440,6 @@
     // ============================================
 
     function renderCapabilitiesOverviewPage(container) {
-        const capabilityIcons = {
-            technical: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg>',
-            consulting: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r=".5" fill="currentColor"/></svg>',
-            delivery: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>',
-            mentorship: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
-            communication: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'
-        };
-
         const page = CAPABILITIES_PAGE || {};
         const introText = page.intro || '';
         let html = `
@@ -456,7 +461,7 @@
             const cap = CAPABILITIES[capId];
             html += `
                 <a href="#capability-${cap.id}" data-page="capability-${cap.id}" class="capability-card">
-                    <div class="capability-icon">${capabilityIcons[cap.id] || ''}</div>
+                    <div class="capability-icon">${CAPABILITY_ICONS_LARGE[cap.id] || ''}</div>
                     <h3>${cap.name}</h3>
                     <p class="capability-question">${cap.question}</p>
                     <p>${cap.description}</p>
@@ -485,33 +490,17 @@
     }
 
     // ============================================
-    // Self-Assessment Page Rendering
+    // Generic Markdown Page Rendering
     // ============================================
 
-    function renderSelfAssessmentPage(container) {
-        const page = SELF_ASSESSMENT_PAGE || {};
-        let html = `
-            <div class="container self-assessment-page">
-                <h1>${page.title || 'Self-Assessment'}</h1>
+    function renderMarkdownPage(container, pageData, cssClass) {
+        const page = pageData || {};
+        container.innerHTML = `
+            <div class="container ${cssClass}">
+                <h1>${page.title || ''}</h1>
                 ${page.content ? parseMarkdownToHtml(page.content) : ''}
             </div>
         `;
-        container.innerHTML = html;
-    }
-
-    // ============================================
-    // Anti-Patterns Page Rendering
-    // ============================================
-
-    function renderAntiPatternsPage(container) {
-        const page = ANTI_PATTERNS_PAGE || {};
-        let html = `
-            <div class="container anti-patterns-page">
-                <h1>${page.title || 'Anti-Patterns'}</h1>
-                ${page.content ? parseMarkdownToHtml(page.content) : ''}
-            </div>
-        `;
-        container.innerHTML = html;
     }
 
     // ============================================
