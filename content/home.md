@@ -58,10 +58,16 @@ Sustainable growth at Sahaj comes from **balanced expansion across capability ar
 ## Key Truths
 
 - Delivery-only excellence has a **growth ceiling**
-- Consulting is the **primary differentiator** beyond Artisan
+- All five capabilities matter — **Consulting is where self-assessment is hardest**
 - Seniority is demonstrated by **sustained impact**, not effort
 - You are not expected to excel in everything at once
-- Growth is about expanding impact across buckets over time
+- Growth is about expanding impact across capabilities over time
+
+## Who This Guide Is For
+
+This guide is designed for **people in delivery roles** — engineers, tech leads, and those building products for clients.
+
+If you're in a different role (operations, sales, design, etc.), some principles may apply, but the specific expectations won't map directly. **We're working on expanding coverage.** For now, talk to your office lead about growth paths for your role.
 
 ## How to Self-Assess Honestly
 
