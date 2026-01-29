@@ -111,7 +111,7 @@
         let html = `
             <div class="container">
                 <div class="detail-header" style="border-left: 4px solid ${persona.color}; padding-left: var(--space-lg);">
-                    <div class="persona-years">${persona.years}</div>
+                    <div class="persona-scope">${persona.scope}</div>
                     <h1>${persona.name}</h1>
                     <p class="detail-subtitle">${persona.tagline}</p>
                     <p class="detail-mindset">"${persona.mindset}"</p>
@@ -240,7 +240,7 @@
                         <div class="capability-section" style="border-left: 4px solid ${persona.color}; margin-left: 0; border-radius: 0 var(--radius-lg) var(--radius-lg) 0;">
                             <div style="display: flex; align-items: baseline; gap: var(--space-md); margin-bottom: var(--space-lg);">
                                 <h3 style="border: none; padding: 0; margin: 0;">${persona.name}</h3>
-                                <span style="color: var(--color-text-muted); font-size: 0.9rem;">${persona.years}</span>
+                                <span style="color: var(--color-text-muted); font-size: 0.9rem;">${persona.scope}</span>
                             </div>
                             <p style="font-style: italic; color: var(--color-text-secondary); margin-bottom: var(--space-lg);">"${persona.mindset}"</p>
                             <ul class="expectations-list">
@@ -389,11 +389,11 @@
         const cx = 200;
         const cy = 200;
         const rings = [
-            { name: 'Explorer', years: '0-1 yrs', radius: 32, color: '#6c5ce7' },
-            { name: 'Artisan', years: '1-3 yrs', radius: 56, color: '#00b894' },
-            { name: 'Catalyst', years: '4-8 yrs', radius: 80, color: '#0984e3' },
-            { name: 'Multiplier', years: '8-12 yrs', radius: 104, color: '#e17055' },
-            { name: 'Strategist', years: '12+ yrs', radius: 128, color: '#2d3436' }
+            { name: 'Explorer', scope: 'Task-level', radius: 32, color: '#6c5ce7' },
+            { name: 'Artisan', scope: 'Feature-level', radius: 56, color: '#00b894' },
+            { name: 'Catalyst', scope: 'Project-level', radius: 80, color: '#0984e3' },
+            { name: 'Multiplier', scope: 'Team-level', radius: 104, color: '#e17055' },
+            { name: 'Strategist', scope: 'Org-level', radius: 128, color: '#2d3436' }
         ];
 
         let html = '';
@@ -455,7 +455,7 @@
                 text-anchor="start"
                 font-size="10"
                 fill="#888"
-                font-family="Inter, sans-serif">${ring.years}</text>`;
+                font-family="Inter, sans-serif">${ring.scope}</text>`;
         });
 
         // Footer text (centered in viewBox)

@@ -241,7 +241,7 @@ function build() {
         const persona = {
             id: frontmatter.id,
             name: frontmatter.name,
-            years: frontmatter.years,
+            scope: frontmatter.scope,
             tagline: frontmatter.tagline,
             color: frontmatter.color,
             order: frontmatter.order,

@@ -1,7 +1,7 @@
 ---
 id: multiplier
 name: Multiplier
-years: 8-12 Years
+scope: Team-level impact
 tagline: Scaling impact via others
 color: "#e17055"
 order: 4
@@ -10,6 +10,8 @@ order: 4
 ## Mindset
 
 "My success is measured by how effective my team becomes without my constant presence."
+
+**The question you're trusted to answer:** "How do we make this team effective?"
 
 ## Nature of Impact
 

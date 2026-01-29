@@ -1,7 +1,7 @@
 ---
 id: catalyst
 name: Catalyst
-years: 4-8 Years
+scope: Project-level impact
 tagline: Sparking change & unblocking
 color: "#0984e3"
 order: 3
@@ -10,6 +10,8 @@ order: 3
 ## Mindset
 
 "I actively improve outcomes by shaping solutions, influencing people, and unblocking systems."
+
+**The question you're trusted to answer:** "What should we build and why?"
 
 ## Nature of Impact
 

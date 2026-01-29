@@ -1,7 +1,7 @@
 ---
 id: artisan
 name: Artisan
-years: 1-3 Years
+scope: Feature-level impact
 tagline: Mastering the craft
 color: "#00b894"
 order: 2
@@ -10,6 +10,8 @@ order: 2
 ## Mindset
 
 "I can deliver high-quality work independently and understand the context around it."
+
+**The question you're trusted to answer:** "What's the right way to build this?"
 
 ## Nature of Impact
 

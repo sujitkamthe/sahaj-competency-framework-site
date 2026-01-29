@@ -1,7 +1,7 @@
 ---
 id: explorer
 name: Explorer
-years: 0-1 Years
+scope: Task-level impact
 tagline: Learning the terrain
 color: "#6c5ce7"
 order: 1
@@ -10,6 +10,8 @@ order: 1
 ## Mindset
 
 "I am learning how things are done, why they are done this way, and how to contribute safely."
+
+**The question you're trusted to answer:** "How do I do this specific thing?"
 
 ## Nature of Impact
 

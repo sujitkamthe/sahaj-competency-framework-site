@@ -710,7 +710,7 @@ li {
 .persona-multiplier:hover { background: linear-gradient(135deg, rgba(232,106,80,0.04) 0%, var(--color-surface) 100%); }
 .persona-strategist:hover { background: linear-gradient(135deg, rgba(74,85,104,0.04) 0%, var(--color-surface) 100%); }
 
-.persona-years {
+.persona-scope {
     font-size: 0.8rem;
     color: var(--color-text-muted);
     font-weight: 600;

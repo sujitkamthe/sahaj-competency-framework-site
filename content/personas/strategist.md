@@ -1,7 +1,7 @@
 ---
 id: strategist
 name: Strategist
-years: 12+ Years
+scope: Org-level impact
 tagline: Shaping the long-term vision
 color: "#2d3436"
 order: 5
@@ -10,6 +10,8 @@ order: 5
 ## Mindset
 
 "I shape direction, culture, and growth beyond individual teams or projects."
+
+**The question you're trusted to answer:** "Where should Sahaj go?"
 
 ## Nature of Impact
 

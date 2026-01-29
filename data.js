@@ -6,7 +6,7 @@ const PERSONAS = {
   "artisan": {
     "id": "artisan",
     "name": "Artisan",
-    "years": "1-3 Years",
+    "scope": "Feature-level impact",
     "tagline": "Mastering the craft",
     "color": "#00b894",
     "order": 2,
@@ -26,7 +26,7 @@ const PERSONAS = {
   "catalyst": {
     "id": "catalyst",
     "name": "Catalyst",
-    "years": "4-8 Years",
+    "scope": "Project-level impact",
     "tagline": "Sparking change & unblocking",
     "color": "#0984e3",
     "order": 3,
@@ -46,7 +46,7 @@ const PERSONAS = {
   "explorer": {
     "id": "explorer",
     "name": "Explorer",
-    "years": "0-1 Years",
+    "scope": "Task-level impact",
     "tagline": "Learning the terrain",
     "color": "#6c5ce7",
     "order": 1,
@@ -66,7 +66,7 @@ const PERSONAS = {
   "multiplier": {
     "id": "multiplier",
     "name": "Multiplier",
-    "years": "8-12 Years",
+    "scope": "Team-level impact",
     "tagline": "Scaling impact via others",
     "color": "#e17055",
     "order": 4,
@@ -85,7 +85,7 @@ const PERSONAS = {
   "strategist": {
     "id": "strategist",
     "name": "Strategist",
-    "years": "12+ Years",
+    "scope": "Org-level impact",
     "tagline": "Shaping the long-term vision",
     "color": "#2d3436",
     "order": 5,
