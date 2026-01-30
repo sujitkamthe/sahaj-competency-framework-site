@@ -82,39 +82,8 @@
     // Markdown Parsing
     // ============================================
 
-    function parseMarkdownFile(content) {
-        const frontmatterRegex = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/;
-        const match = content.match(frontmatterRegex);
-
-        if (!match) {
-            return { frontmatter: {}, body: content };
-        }
-
-        const frontmatterStr = match[1];
-        const body = match[2];
-        const frontmatter = {};
-
-        frontmatterStr.split('\n').forEach(line => {
-            const colonIndex = line.indexOf(':');
-            if (colonIndex > 0) {
-                const key = line.substring(0, colonIndex).trim();
-                let value = line.substring(colonIndex + 1).trim();
-
-                if ((value.startsWith('"') && value.endsWith('"')) ||
-                    (value.startsWith("'") && value.endsWith("'"))) {
-                    value = value.slice(1, -1);
-                }
-
-                if (!isNaN(value) && value !== '') {
-                    value = Number(value);
-                }
-
-                frontmatter[key] = value;
-            }
-        });
-
-        return { frontmatter, body };
-    }
+    // Use shared frontmatter parser (loaded from frontmatter-parser.js)
+    const parseMarkdownFile = FrontmatterParser.parseFrontmatter;
 
     function slugify(text) {
         return text
