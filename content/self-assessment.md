@@ -87,7 +87,15 @@ For each area, briefly describe:
 
 This summary is material for conversation. It shows teammates how you've processed your feedback so they can confirm, correct, or add nuance.
 
-## Step 5: Look for Imbalance
+## Step 5: Reflect on All Your Feedback
+
+It's easy to focus on feedback from high-profile work: the big release, the client escalation, the visible project. But you likely received feedback on quieter contributions too.
+
+Did teammates thank you for code reviews, documentation, or process improvements? Did someone mention that your work prevented a problem? Did a newer team member say your support helped them ramp up?
+
+This feedback counts. Don't omit it just because the work lacked drama. Reflection means accounting for all the feedback you received, not just the loudest signals.
+
+## Step 6: Look for Imbalance
 
 Your expectations likely span multiple capability areas. Check for patterns.
 
@@ -97,7 +105,7 @@ Your expectations likely span multiple capability areas. Check for patterns.
 
 If you notice imbalance, name it. It's useful information for the calibration conversation.
 
-## Step 6: Share and Calibrate
+## Step 7: Share and Calibrate
 
 Your self-assessment goes to your teammates and office. They'll review it and respond.
 
@@ -127,3 +135,11 @@ If you find yourself building a case or justifying, pause. The goal is to show y
 ### Missing the Conversation
 
 Self-assessment without the follow-up conversation is incomplete. The assessment is a starting point. Calibration is where it becomes useful.
+
+### Assuming You Saw Everything (for reviewers)
+
+When reviewing others, it's natural to anchor on work you directly observed. But you may not have seen their code reviews, their help onboarding someone, or the problem they quietly prevented.
+
+If a self-assessment mentions contributions you didn't witness, that's not a red flag. It's an invitation to ask. "I didn't see this directly, can you tell me more?" is better than silent skepticism.
+
+For teammates who've been on the project a while, consistent calm may reflect more skill than repeated rescues. If fires keep happening, ask why. Don't just credit whoever puts them out.
