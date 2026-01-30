@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-A static single-page website for "The Sahaj Field Guide to Growth & Impact" - an engineering competency framework. The site presents personas (Explorer → Strategist) and capability areas (Technical Delivery, Consulting, Delivery Excellence, Mentorship, Communication) with self-assessment guidance.
+A static single-page website for "The Sahaj Field Guide to Growth & Impact" - an engineering competency framework. The site presents personas (growth stages) and capability areas with self-assessment guidance.
 
 ## Build Command
 
@@ -44,10 +44,12 @@ This watches `content/*.md` for changes, rebuilds `manifest.json` automatically,
 **Content Structure:**
 - Persona files (`content/personas/*.md`): frontmatter (layout, id, name, scope, tagline, color, order) + sections (Mindset, Nature of Impact, Success Looks Like) + capability expectations
 - Capability files (`content/capabilities/*.md`): frontmatter (layout, id, name, question, icon, order) + Description, Introduction, Note sections
-- Overview pages use annotations: `<!-- diagram: impact-rings -->`, `<!-- persona-cards -->`, `<!-- cards -->`
+- Overview pages use annotations: `<!-- cards -->`, `<!-- key-truths -->`, `<!-- usage -->`, `<!-- explore-cards -->`
 
 **Routing:**
-- Hash-based SPA routing (e.g., `#home`, `#persona-explorer`, `#capability-technical`)
+- Hash-based SPA routing (e.g., `#home`, `#personas`, `#capabilities`, `#self-assessment`, `#quick-reference`)
+- Detail pages: `#persona-{id}`, `#capability-{id}`
+- In-page anchors: `#page-id/section-id` format (e.g., `#quick-reference/common-questions`)
 - Pages created dynamically on first navigation
 
 ## Task Management
