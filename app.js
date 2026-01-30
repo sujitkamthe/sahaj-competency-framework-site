@@ -871,20 +871,18 @@
 
         container.innerHTML = html;
 
-        // Add tab switching
-        const tabs = container.querySelectorAll('.persona-tab');
-        const contents = container.querySelectorAll('.persona-content');
+        // Tab switching via event delegation (single listener, survives re-renders)
+        container.addEventListener('click', function(e) {
+            const tab = e.target.closest('.persona-tab');
+            if (!tab) return;
 
-        tabs.forEach(tab => {
-            tab.addEventListener('click', function() {
-                const targetPersona = this.getAttribute('data-persona');
+            const targetPersona = tab.getAttribute('data-persona');
 
-                tabs.forEach(t => t.classList.remove('active'));
-                contents.forEach(c => c.classList.remove('active'));
+            container.querySelectorAll('.persona-tab').forEach(t => t.classList.remove('active'));
+            container.querySelectorAll('.persona-content').forEach(c => c.classList.remove('active'));
 
-                this.classList.add('active');
-                container.querySelector(`.persona-content[data-persona="${targetPersona}"]`)?.classList.add('active');
-            });
+            tab.classList.add('active');
+            container.querySelector(`.persona-content[data-persona="${targetPersona}"]`)?.classList.add('active');
         });
     }
 
@@ -1020,20 +1018,18 @@
         html += `</div>`;
         container.innerHTML = html;
 
-        // Add tab switching
-        const tabs = container.querySelectorAll('.persona-tab');
-        const contents = container.querySelectorAll('.persona-content');
+        // Tab switching via event delegation (single listener, survives re-renders)
+        container.addEventListener('click', function(e) {
+            const tab = e.target.closest('.persona-tab');
+            if (!tab) return;
 
-        tabs.forEach(tab => {
-            tab.addEventListener('click', function() {
-                const targetPersona = this.getAttribute('data-persona');
+            const targetPersona = tab.getAttribute('data-persona');
 
-                tabs.forEach(t => t.classList.remove('active'));
-                contents.forEach(c => c.classList.remove('active'));
+            container.querySelectorAll('.persona-tab').forEach(t => t.classList.remove('active'));
+            container.querySelectorAll('.persona-content').forEach(c => c.classList.remove('active'));
 
-                this.classList.add('active');
-                container.querySelector(`.persona-content[data-persona="${targetPersona}"]`)?.classList.add('active');
-            });
+            tab.classList.add('active');
+            container.querySelector(`.persona-content[data-persona="${targetPersona}"]`)?.classList.add('active');
         });
     }
 
