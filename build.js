@@ -397,6 +397,13 @@ function parseHomeFile(content) {
         };
     }
 
+    if (sectionMap['Growth Is Self-Directed']) {
+        home.sections.selfDirected = {
+            heading: 'Growth Is Self-Directed',
+            paragraphs: parseParagraphSection(sectionMap['Growth Is Self-Directed'])
+        };
+    }
+
     if (sectionMap['How to Use This Guide']) {
         const usage = parseUsageSection(sectionMap['How to Use This Guide']);
         home.sections.usage = {

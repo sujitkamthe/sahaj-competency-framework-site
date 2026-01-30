@@ -9,6 +9,14 @@ This is a shared vocabulary for talking about growth at Sahaj. It describes **ho
 
 We intentionally do not use formal titles or grades. This guide exists to create **clarity without hierarchy**, to make growth paths visible, and to support honest conversations about expectations and feedback.
 
+## Growth Is Self-Directed
+
+Sahaj is an open field. You choose which direction to go, what skills to build, and how quickly to build them, based on your choices and the opportunities you prioritize.
+
+Some people struggle to see the field. Some struggle to see the paths others have already cut through the grass. This guide attempts to show those paths: common patterns of growth that have worked for others.
+
+But this is not the only way to grow. All paths that create impact are valued. Use this as a starting point if you can't see a path forward, not as a constraint on where you can go.
+
 ## How to Use This Guide
 
 This guide supports conversations, not conclusions. Use it when:

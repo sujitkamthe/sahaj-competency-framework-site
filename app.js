@@ -322,7 +322,17 @@
             `;
         }
 
-        // 2. Usage section (How to Use This Guide)
+        // 2. Self-Directed Growth section
+        if (home.sections.selfDirected) {
+            html += `
+                <section class="self-directed-section">
+                    <h2>${home.sections.selfDirected.heading}</h2>
+                    ${home.sections.selfDirected.paragraphs.map(p => `<p>${parseInlineMarkdown(p)}</p>`).join('')}
+                </section>
+            `;
+        }
+
+        // 3. Usage section (How to Use This Guide)
         if (home.sections.usage) {
             let usageHtml = `
                 <section class="usage-section">
