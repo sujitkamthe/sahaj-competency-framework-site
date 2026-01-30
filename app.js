@@ -574,26 +574,16 @@
                 `;
             };
 
-            // Foundation row (3 cards)
-            html += `<div class="personas-grid personas-grid-3">`;
-            for (const id of foundation) {
-                html += await renderPersonaCard(id);
-            }
-            html += `</div>`;
+            // Load all persona cards in parallel
+            const [foundationCards, teamCards, orgCards] = await Promise.all([
+                Promise.all(foundation.map(renderPersonaCard)),
+                Promise.all(teamLevel.map(renderPersonaCard)),
+                Promise.all(orgLevel.map(renderPersonaCard))
+            ]);
 
-            // Team-level row (2 cards - TL / IC side by side)
-            html += `<div class="personas-grid personas-grid-2">`;
-            for (const id of teamLevel) {
-                html += await renderPersonaCard(id);
-            }
-            html += `</div>`;
-
-            // Org-level row (2 cards - TL / IC side by side)
-            html += `<div class="personas-grid personas-grid-2">`;
-            for (const id of orgLevel) {
-                html += await renderPersonaCard(id);
-            }
-            html += `</div>`;
+            html += `<div class="personas-grid personas-grid-3">${foundationCards.join('')}</div>`;
+            html += `<div class="personas-grid personas-grid-2">${teamCards.join('')}</div>`;
+            html += `<div class="personas-grid personas-grid-2">${orgCards.join('')}</div>`;
         }
 
         html += `</div>`;
