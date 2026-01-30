@@ -295,7 +295,21 @@
                     e.preventDefault();
                     const hash = href.slice(1);
                     const [pageId, sectionId] = hash.split('/');
-                    navigateTo(pageId, true, sectionId || null);
+
+                    // Check if this is an in-page anchor (element exists on current page)
+                    const activePage = document.querySelector('.page.active');
+                    const targetElement = activePage?.querySelector('#' + hash) ||
+                                         activePage?.querySelector('[id="' + hash + '"]');
+
+                    if (targetElement && !sectionId) {
+                        // In-page anchor - scroll to element and update URL
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                        const currentPageId = activePage?.id?.replace('page-', '') || 'home';
+                        history.pushState({ page: currentPageId, section: hash }, '', '#' + currentPageId + '/' + hash);
+                    } else {
+                        // Page navigation
+                        navigateTo(pageId, true, sectionId || null);
+                    }
                 }
             }
         });
@@ -388,7 +402,7 @@
         'persona-detail': renderPersonaDetailLayout,
         'capability-detail': renderCapabilityDetailLayout,
         'markdown-page': renderMarkdownPageLayout,
-        'anti-patterns': renderAntiPatternsLayout
+        'quick-reference': renderQuickReferenceLayout
     };
 
     async function renderPage(pageId, container) {
@@ -488,7 +502,7 @@
     function renderExploreCards() {
         return `
             <section class="explore-section">
-                <h2>Explore the Framework</h2>
+                <h2>Explore the Guide</h2>
                 <div class="explore-grid">
                     <a href="#personas" data-page="personas" class="explore-card">
                         <h3>Personas</h3>
@@ -875,20 +889,21 @@
         `;
     }
 
-    async function renderAntiPatternsLayout(content, container) {
+    async function renderQuickReferenceLayout(content, container) {
         // Get intro text (before first H2)
         const introText = getIntroText(content.body);
 
         // Parse all H2 sections
         const sections = parseSections(content.body);
 
-        // Separate persona sections from universal sections
+        // Categorize sections: persona anti-patterns, known special sections, and generic sections
         const personaSections = {};
+        const genericSections = [];
         let universalWarnings = null;
         let finalSelfCheck = null;
 
         for (const section of sections) {
-            if (section.title.includes('Anti-Patterns')) {
+            if (section.title.endsWith(' Anti-Patterns')) {
                 // Extract persona name (e.g., "Explorer Anti-Patterns" -> "explorer")
                 const personaName = section.title.replace(' Anti-Patterns', '').toLowerCase();
                 personaSections[personaName] = parseAntiPatternSection(section.content);
@@ -896,6 +911,9 @@
                 universalWarnings = section.content;
             } else if (section.title === 'Final Self-Check') {
                 finalSelfCheck = section.content;
+            } else {
+                // Generic sections render as regular markdown before the tabs
+                genericSections.push(section);
             }
         }
 
@@ -903,7 +921,20 @@
             <div class="container anti-patterns-page">
                 <h1>${content.title}</h1>
                 <p class="page-intro">${parseInlineMarkdown(introText)}</p>
+        `;
 
+        // Render generic sections (FAQ, intro text, etc.) before the tabs
+        for (const section of genericSections) {
+            const sectionId = slugify(section.title);
+            html += `
+                <section class="reference-section">
+                    ${renderHeading(2, section.title, sectionId)}
+                    ${parseMarkdownToHtml(section.content)}
+                </section>
+            `;
+        }
+
+        html += `
                 <div class="persona-tabs">
                     ${manifest.personas.map((pId, index) => {
                         const persona = manifest.pages[`persona-${pId}`];

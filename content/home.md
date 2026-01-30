@@ -40,14 +40,14 @@ This is a conversation between you and your teammates. Use this guide as a refer
 
 Expectations may differ from the guide based on your team's context. Some areas may need more depth, others less. What matters is that expectations are **explicit and agreed**, not assumed.
 
-If expectations were never made explicit, that's a gap to address first. Implicit expectations cause trouble: during feedback, during self-assessment, and during calibration.
+If expectations were never made explicit, that's a gap to address first. Implicit expectations cause trouble: during feedback, during self-assessment, and during team check.
 
 ### The Flow
 
 1. **Expectations are set**: using this guide as a reference
 2. **Work happens**: with ongoing feedback against those expectations
 3. **Self-assessment**: you reflect on feedback and summarize your understanding
-4. **Calibration**: teammates confirm, correct, or add perspective
+4. **Team check**: teammates confirm, correct, or add perspective
 
 Each step depends on the previous one. Self-assessment without clear expectations is guesswork. Feedback without shared vocabulary is inconsistent.
 
@@ -90,7 +90,7 @@ In a culture with open conversations and open salaries, expectations must be exp
 <!-- key-truths -->
 
 - Delivery-only excellence has a **growth ceiling**
-- All five capabilities matter; **Consulting is where calibration is hardest** (everyone thinks they consult; few actually do)
+- All five capabilities matter; **Consulting is where team check is hardest** (everyone thinks they consult; few actually do)
 - Seniority is demonstrated by **sustained impact**, not effort
 - You are not expected to excel in everything at once
 - Growth is about expanding impact across capabilities over time

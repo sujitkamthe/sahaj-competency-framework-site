@@ -27,3 +27,13 @@ Sustainable growth at Sahaj comes from **balanced expansion across capability ar
 **Your weakest capability sets your ceiling.** If you demonstrate Artisan-level Technical Delivery but Explorer-level Consulting, you're operating as an Explorer overall, not an Artisan with a gap.
 
 Early on, gaps are hard to see: the scope is smaller, the stakes are lower. Around Catalyst level, gaps become obvious. You're shaping direction, working with stakeholders, leading others. Blind spots show.
+
+### Can I Specialize and Still Grow?
+
+Deep expertise is valued. You can grow significantly by going deep in Technical Delivery or Consulting while other areas stay adequate.
+
+But over time, a gap creates tension. As compensation grows, expectations grow with it. If your impact stays narrow, a mismatch emerges: you're expected to operate at a level your weak areas can't support. Eventually, either expectations adjust downward (uncomfortable) or compensation growth slows (also uncomfortable).
+
+This isn't a policy. It's a natural consequence of how impact scales. Broader capabilities let you sustain growth longer. Persistent gaps don't block you immediately; they create friction later.
+
+If you genuinely don't enjoy a capability area, that's worth naming. It's better to acknowledge it than to pretend. But understand the trade-off: staying narrow limits how far sustained growth can go.

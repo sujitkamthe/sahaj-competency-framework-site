@@ -97,29 +97,22 @@ function build() {
         const content = fs.readFileSync(fullPath, 'utf-8');
         const { frontmatter } = parseFrontmatter(content);
 
-        // Determine page ID from file path and layout
+        // Determine page ID from file path
         let pageId;
-        const layout = frontmatter.layout;
 
-        if (relativePath === 'home.md') {
-            pageId = 'home';
-        } else if (relativePath === 'personas.md') {
-            pageId = 'personas';
-        } else if (relativePath === 'capabilities.md') {
-            pageId = 'capabilities';
-        } else if (relativePath === 'self-assessment.md') {
-            pageId = 'self-assessment';
-        } else if (relativePath === 'anti-patterns.md') {
-            pageId = 'anti-patterns';
-        } else if (relativePath.startsWith('personas/')) {
+        if (relativePath.startsWith('personas/')) {
+            // Persona detail pages: personas/explorer.md -> persona-explorer
             pageId = `persona-${frontmatter.id}`;
             personaEntries.push({ id: frontmatter.id, order: frontmatter.order });
         } else if (relativePath.startsWith('capabilities/')) {
+            // Capability detail pages: capabilities/consulting.md -> capability-consulting
             pageId = `capability-${frontmatter.id}`;
             capabilityEntries.push({ id: frontmatter.id, order: frontmatter.order });
+        } else if (relativePath.endsWith('.md') && !relativePath.includes('/')) {
+            // Top-level pages: home.md -> home, quick-reference.md -> quick-reference
+            pageId = relativePath.slice(0, -3);
         } else {
-            // Unknown file, skip
-            console.log(`  Skipped: ${relativePath} (unknown type)`);
+            console.log(`  Skipped: ${relativePath} (unknown structure)`);
             continue;
         }
 

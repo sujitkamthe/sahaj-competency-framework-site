@@ -1,7 +1,49 @@
 ---
-layout: anti-patterns
-title: Persona Anti-Patterns
+layout: quick-reference
+title: Quick Reference
 ---
+
+This page collects common questions about how the guide works, plus warning signs that expectations may be set too high.
+
+## Common Questions
+
+### Are Personas Assigned to Me?
+
+No. Personas aren't labels you receive. They're vocabulary for setting expectations.
+
+When teammates set expectations with you, they might say: "I'm expecting roughly Artisan-level ownership on this project." That's a reference point, not a designation.
+
+Expectations get customized to your context: your team, your project, your growth areas. The persona helps communicate the general shape; the specifics are agreed between you and your teammates.
+
+You don't "become" a Catalyst. You and your team agree on expectations that look like Catalyst-level impact in your situation.
+
+### What if I Don't Want to Lead Teams?
+
+People leadership is not a requirement for growth at Sahaj. You can grow as an individual contributor by expanding impact in other ways:
+
+- Shaping technical direction across teams (not just your own code)
+- Mentoring through pairing, reviews, and knowledge sharing (not managing)
+- Influencing decisions through clarity and trust (not authority)
+
+Multiplier-level impact doesn't require direct reports. It requires that others become more effective because of you, whether through systems, standards, or skill transfer.
+
+### What if I Switched Domains or Tech Stacks?
+
+You don't start over, but some capabilities reset faster than others.
+
+Technical Delivery may dip temporarily as new languages, tools, and patterns take time. But Consulting, Delivery Excellence, Mentorship, and Communication often transfer. You still know how to remove ambiguity, ship reliably, and help others grow.
+
+Expect adjustment, not reset. The question is: which capabilities stayed strong, and which need rebuilding?
+
+### How Does This Relate to Salary?
+
+This guide describes impact, not compensation. Persona levels are a vocabulary for setting expectations and giving feedback, not a pay grade.
+
+Salary decisions involve more factors: market rates, tenure, role scope, business context. They happen in a separate conversation.
+
+If you're using this guide to justify a raise, pause. Assess your impact honestly first. Compensation follows from sustained, recognized impact, not from claiming a level.
+
+## Anti-Patterns
 
 Common traps that signal expectations may be set too high, or that you're overestimating how well you met them.
 
@@ -167,4 +209,4 @@ Before finalising expectations or your self-assessment, ask:
 - Is my impact **person-dependent** or **system-dependent**?
 - Would others describe me at this persona level **without hesitation**?
 
-**Warning:** If the answer feels defensively justified rather than obvious, expectations may be set too high, or your self-assessment needs recalibration.
+**Warning:** If the answer feels defensively justified rather than obvious, expectations may be set too high, or your self-assessment needs revision.

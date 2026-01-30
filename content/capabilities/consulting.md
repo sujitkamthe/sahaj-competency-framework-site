@@ -34,3 +34,11 @@ Growth at Sahaj requires moving from receiving clarity to building your own. Ear
 ## Note
 
 The expectations below describe what Consulting looks like in practice. Use them to check if expectations are realistic and to reflect on feedback.
+
+### What if the Client Just Wants Execution?
+
+Even execution-heavy engagements have consulting moments: clarifying requirements, flagging risks, proposing alternatives when asked to build something brittle.
+
+Consulting isn't about overriding the client. It's about removing ambiguity, surfacing trade-offs, and helping them make informed decisions, even small ones.
+
+If you're waiting for a strategy workshop to demonstrate Consulting, you're missing daily opportunities.

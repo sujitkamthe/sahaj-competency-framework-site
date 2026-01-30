@@ -3,7 +3,7 @@ layout: markdown-page
 title: How to Do Your Self-Assessment
 ---
 
-This framework is designed to support **honest reflection**, not optimistic self-rating. The goal is to summarize your understanding of feedback you've received, not to claim a level or build a case.
+This guide is designed to support **honest reflection**, not optimistic self-rating. The goal is to summarize your understanding of feedback you've received, not to claim a level or build a case.
 
 ## How This Process Works
 
@@ -11,7 +11,7 @@ Your self-assessment is a starting point, not a conclusion.
 
 Throughout your work, you receive feedback from teammates, leads, and stakeholders. This self-assessment is where you reflect on that feedback and show how you've processed it. The question isn't "what level am I?" It's "did I meet the expectations my team set with me, and did I understand my feedback correctly?"
 
-After you complete your assessment, teammates from your project and office will respond. They'll confirm your understanding, correct misreadings, or add perspective you may have missed. You'll do the same for them. This is mutual calibration, not one-way review.
+After you complete your assessment, teammates from your project and office will respond. They'll confirm your understanding, correct misreadings, or add perspective you may have missed. You'll do the same for them. This is a team check, not one-way judgment.
 
 Everyone in your office sees these assessments. This transparency means overstating doesn't work: your teammates know your work. It also means you can be honest about uncertainty. Saying "I'm not sure I've read this right" invites useful correction. Treating it as a case to defend invites scrutiny.
 
@@ -103,7 +103,7 @@ Your expectations likely span multiple capability areas. Check for patterns.
 - Persistent gaps signal a ceiling, regardless of strengths elsewhere
 - Exceeding in one area doesn't compensate for being below in another
 
-If you notice imbalance, name it. It's useful information for the calibration conversation.
+If you notice imbalance, name it. It's useful information for the team check.
 
 ## Step 7: Share and Calibrate
 
@@ -116,7 +116,15 @@ Your self-assessment goes to your teammates and office. They'll review it and re
 
 **You'll do the same for them.** Review their self-assessments. Confirm, challenge, or add nuance based on your experience working with them.
 
-This mutual calibration is where clarity emerges, not from your self-assessment alone.
+The team check is where clarity emerges, not from your self-assessment alone.
+
+### What if teammates give conflicting feedback?
+
+Conflicting feedback usually means context differs. One teammate saw your work on X, another saw Y. Neither is wrong; they observed different slices.
+
+In the team check, name the conflict: "I got feedback that I led well on project A, but struggled on project B." This invites discussion about what varied. Was it scope? Stakeholders? Your familiarity with the domain?
+
+There's no vote. The goal is to understand the pattern, not pick a winner.
 
 ## Common Traps
 
@@ -126,7 +134,7 @@ If your self-assessment is higher than what feedback suggested, you'll hear abou
 
 ### Understating
 
-Some people default to "below expectations" out of modesty. If feedback was positive, reflect that. Underselling creates calibration work for others.
+Some people default to "below expectations" out of modesty. If feedback was positive, reflect that. Underselling creates extra work for your teammates.
 
 ### Defending Instead of Reflecting
 
@@ -134,9 +142,9 @@ If you find yourself building a case or justifying, pause. The goal is to show y
 
 ### Missing the Conversation
 
-Self-assessment without the follow-up conversation is incomplete. The assessment is a starting point. Calibration is where it becomes useful.
+Self-assessment without the follow-up conversation is incomplete. The assessment is a starting point. The team check is where it becomes useful.
 
-### Assuming You Saw Everything (for reviewers)
+### Assuming You Saw Everything (for teammates)
 
 When reviewing others, it's natural to anchor on work you directly observed. But you may not have seen their code reviews, their help onboarding someone, or the problem they quietly prevented.
 
