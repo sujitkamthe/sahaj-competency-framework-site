@@ -31,4 +31,4 @@ Growth at Sahaj requires moving from receiving clarity to building your own. Ear
 
 ## Note
 
-This capability requires concrete evidence. The expectations below describe what Consulting looks like in practice — use them to reflect honestly.
+The expectations below describe what Consulting looks like in practice — use them to check if expectations are realistic and to reflect on feedback.

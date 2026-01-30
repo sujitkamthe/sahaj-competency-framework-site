@@ -106,17 +106,17 @@ Use this section when **setting expectations** (are we being realistic?) and whe
 
 **Signal:** If these patterns apply, Multiplier-level expectations may be more realistic than Strategist.
 
-## Universal Over-Rating Signals
+## Universal Warning Signs
 
 If you notice these patterns, pause and reassess:
 
 - "I could do it if I were given the chance"
 - "I do this informally, just not officially"
 - "It worked once, so I count it"
-- "People come to me a lot" (without evidence of sustained change)
+- "People come to me a lot" (without sustained change following)
 - "I'm already doing parts of the next persona"
 
-**Reminder:** Occasional behaviour does not define your persona. Consistency, durability, and reliance without prompting do.
+**Reminder:** Occasional behaviour doesn't reflect where you operate. Consistency, durability, and reliance without prompting do.
 
 ## Final Self-Check
 
