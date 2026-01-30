@@ -1,7 +1,9 @@
 ---
+layout: capability-detail
 id: technical
 name: Technical Delivery
 question: How well you build systems
+icon: icons/technical.svg
 order: 1
 ---
 

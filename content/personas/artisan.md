@@ -1,4 +1,5 @@
 ---
+layout: persona-detail
 id: artisan
 name: Artisan
 scope: Feature-level impact

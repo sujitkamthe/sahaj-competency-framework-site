@@ -1,4 +1,5 @@
 ---
+layout: persona-detail
 id: explorer
 name: Explorer
 scope: Task-level impact

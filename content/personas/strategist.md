@@ -1,4 +1,5 @@
 ---
+layout: persona-detail
 id: strategist
 name: Strategist
 scope: Org-level impact

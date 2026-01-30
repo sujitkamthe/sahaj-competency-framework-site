@@ -4,7 +4,11 @@ A minimalistic, single-page website for the Sahaj Engineering Competency Framewo
 
 ## Quick Start
 
-Simply open `index.html` in any web browser. No server required.
+```bash
+npm run dev
+```
+
+This starts a dev server at `http://localhost:8080` with live reload.
 
 ## Updating Content
 
@@ -13,30 +17,36 @@ Content is stored in Markdown files in the `content/` directory:
 ```
 content/
 ├── home.md                    # Home page content
+├── personas.md                # Personas overview page
+├── capabilities.md            # Capabilities overview page
+├── self-assessment.md         # Self-assessment guide
+├── anti-patterns.md           # Anti-patterns guide
 ├── personas/
 │   ├── explorer.md
 │   ├── artisan.md
 │   ├── catalyst.md
 │   ├── multiplier.md
 │   └── strategist.md
-└── capabilities/
-    ├── technical-delivery.md
-    ├── consulting.md
-    ├── delivery-excellence.md
-    ├── mentorship.md
-    └── communication.md
+├── capabilities/
+│   ├── technical-delivery.md
+│   ├── consulting.md
+│   ├── delivery-excellence.md
+│   ├── mentorship.md
+│   └── communication.md
+└── icons/
+    └── *.svg                  # Capability icons
 ```
 
 ### To update content:
 
 1. Edit the relevant `.md` file in the `content/` directory
-2. Run the build script to regenerate `data.js`:
+2. Run the build script to regenerate `manifest.json`:
 
 ```bash
 node build.js
 ```
 
-3. Refresh the browser to see changes
+3. Refresh the browser to see changes (or use `npm run dev` for auto-reload)
 
 ### Markdown File Format
 
@@ -44,9 +54,10 @@ Each persona file has this structure:
 
 ```markdown
 ---
+layout: persona-detail
 id: explorer
 name: Explorer
-years: 0-1 Years
+scope: Task-level impact
 tagline: Learning the terrain
 color: "#6c5ce7"
 order: 1
@@ -86,26 +97,36 @@ order: 1
 ...
 ```
 
+### Annotations
+
+Use HTML comments to trigger special rendering:
+
+- `<!-- cards -->` - Render following h3 sections as cards
+- `<!-- diagram: impact-rings -->` - Insert impact rings diagram
+- `<!-- diagram: capability-radar -->` - Insert capability radar diagram
+- `<!-- persona-cards -->` - Insert persona cards grid
+- `<!-- capability-cards -->` - Insert capability cards grid
+- `<!-- explore-cards -->` - Insert explore cards (links to Personas/Capabilities)
+
 ## File Structure
 
 ```
 website/
-├── index.html      # Main HTML file
+├── index.html      # Minimal HTML shell
 ├── styles.css      # Styling (minimalistic theme)
-├── data.js         # Generated data (don't edit directly)
-├── app.js          # Application logic
-├── build.js        # Build script
+├── manifest.json   # Generated metadata (don't edit directly)
+├── app.js          # Application logic (runtime markdown parsing)
+├── build.js        # Build script (generates manifest.json)
 ├── content/        # Editable Markdown content
 └── README.md       # This file
 ```
 
 ## Hosting
 
-To host this website:
+This site requires a web server (content is fetched at runtime):
 
-1. Copy the entire `website/` folder to your web server
-2. Or use any static hosting service (GitHub Pages, Netlify, etc.)
-3. Or simply share the folder - users can open `index.html` directly
+1. Use any static hosting service (GitHub Pages, Netlify, Vercel, etc.)
+2. Or run locally with `npm run dev`
 
 ## Browser Support
 

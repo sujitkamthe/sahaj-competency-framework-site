@@ -1,7 +1,9 @@
 ---
+layout: capability-detail
 id: mentorship
 name: Mentorship & Talent Growth
 question: Who grows because of you
+icon: icons/mentorship.svg
 order: 4
 ---
 

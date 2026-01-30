@@ -1,7 +1,9 @@
 ---
+layout: capability-detail
 id: consulting
 name: Consulting
 question: How well you clarify problems and shape solutions
+icon: icons/consulting.svg
 order: 2
 ---
 

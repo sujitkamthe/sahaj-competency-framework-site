@@ -231,6 +231,30 @@ h2 { font-size: 1.875rem; margin-bottom: var(--space-md); margin-top: var(--spac
 h3 { font-size: 1.35rem; margin-bottom: var(--space-sm); }
 h4 { font-size: 1.1rem; }
 
+/* Anchor links for headings */
+.anchor-link {
+    opacity: 0;
+    margin-left: 0.5rem;
+    font-size: 0.8em;
+    font-weight: 400;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: opacity var(--transition);
+}
+
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link {
+    opacity: 0.5;
+}
+
+.anchor-link:hover {
+    opacity: 1 !important;
+    color: var(--color-accent);
+}
+
 p { margin-bottom: var(--space-md); }
 
 a {

@@ -37,13 +37,13 @@
             <li class="dropdown">
                 <a href="#personas" data-page="personas">Personas</a>
                 <ul class="dropdown-menu" id="personas-dropdown">
-                    <!-- Populated dynamically from data.js -->
+                    <!-- Populated dynamically from manifest.json -->
                 </ul>
             </li>
             <li class="dropdown">
                 <a href="#capabilities" data-page="capabilities">Capability Areas</a>
                 <ul class="dropdown-menu" id="capabilities-dropdown">
-                    <!-- Populated dynamically from data.js -->
+                    <!-- Populated dynamically from manifest.json -->
                 </ul>
             </li>
             <li><a href="#self-assessment" data-page="self-assessment">Self-Assessment</a></li>
@@ -65,36 +65,8 @@
         </button>
     </nav>
 
-    <main class="content">
-        <!-- Home Page - Rendered dynamically from home.md via app.js -->
-        <section id="home" class="page active"></section>
-
-        <!-- Personas Overview Page - Rendered dynamically from personas/*.md via app.js -->
-        <section id="personas" class="page"></section>
-
-        <!-- Capability Areas Overview Page - Rendered dynamically from capabilities/*.md via app.js -->
-        <section id="capabilities" class="page"></section>
-
-        <!-- Individual Persona Pages will be inserted here by JS -->
-        <section id="persona-explorer" class="page persona-detail-page"></section>
-        <section id="persona-artisan" class="page persona-detail-page"></section>
-        <section id="persona-catalyst" class="page persona-detail-page"></section>
-        <section id="persona-multiplier" class="page persona-detail-page"></section>
-        <section id="persona-strategist" class="page persona-detail-page"></section>
-
-        <!-- Individual Capability Pages will be inserted here by JS -->
-        <section id="capability-technical" class="page capability-detail-page"></section>
-        <section id="capability-consulting" class="page capability-detail-page"></section>
-        <section id="capability-delivery" class="page capability-detail-page"></section>
-        <section id="capability-mentorship" class="page capability-detail-page"></section>
-        <section id="capability-communication" class="page capability-detail-page"></section>
-
-
-        <!-- Self-Assessment Guide Page - Rendered dynamically from self-assessment.md via app.js -->
-        <section id="self-assessment" class="page"></section>
-
-        <!-- Anti-Patterns Page - Rendered dynamically from anti-patterns.md via app.js -->
-        <section id="anti-patterns" class="page"></section>
+    <main id="app" class="content">
+        <!-- Pages are created dynamically by app.js based on manifest.json -->
     </main>
 
     <footer class="main-footer">
@@ -104,7 +76,6 @@
         </div>
     </footer>
 
-    <script src="data.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

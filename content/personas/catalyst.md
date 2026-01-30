@@ -1,4 +1,5 @@
 ---
+layout: persona-detail
 id: catalyst
 name: Catalyst
 scope: Project-level impact

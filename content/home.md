@@ -1,4 +1,5 @@
 ---
+layout: home
 title: The Field Guide to Growth & Impact
 tagline: Clarity without hierarchy. Impact over titles.
 ---
@@ -56,6 +57,8 @@ If you're in a different role (operations, sales, design, etc.), some principles
 
 ## What We Value
 
+<!-- cards -->
+
 ### Technical Excellence as a Baseline, Not a Differentiator
 
 Clean code, strong design, testing, and sound engineering practices are expected at every stage. Technical depth is necessary, but by itself it is not enough for long-term growth.
@@ -89,3 +92,5 @@ In a culture with open conversations and open salaries, expectations must be exp
 - Growth is about expanding impact across capabilities over time
 - Self-assessment is about **processing feedback**, not claiming a level
 - **Strong Technical Delivery is mandatory but insufficient** for long-term growth
+
+<!-- explore-cards -->

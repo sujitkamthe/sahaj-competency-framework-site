@@ -1,4 +1,5 @@
 ---
+layout: markdown-page
 title: Persona Anti-Patterns
 ---
 
@@ -33,7 +34,7 @@ Use this section when **setting expectations** (are we being realistic?) and whe
 ### Signs expectations may be too high:
 
 - Mistaking high-quality delivery for broader ownership
-- Being the "go-to person" because of availability, not leverage
+- Being the "go-to person" for doing the work, not for making others better at it
 - Solving the same problems repeatedly without eliminating root causes
 - Waiting for direction, even when you could lead
 - Equating seniority or tenure with Catalyst behaviour

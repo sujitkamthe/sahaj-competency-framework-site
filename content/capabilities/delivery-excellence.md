@@ -1,7 +1,9 @@
 ---
+layout: capability-detail
 id: delivery
 name: Delivery Excellence
 question: How reliably and sustainably value is delivered
+icon: icons/delivery.svg
 order: 3
 ---
 

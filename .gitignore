@@ -23,3 +23,7 @@ npm-debug.log*
 
 # Generated files (built by CI)
 data.js
+manifest.json
+
+# Baseline screenshots for visual regression testing
+baseline-screenshots/

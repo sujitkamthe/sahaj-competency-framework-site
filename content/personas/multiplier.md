@@ -1,4 +1,5 @@
 ---
+layout: persona-detail
 id: multiplier
 name: Multiplier
 scope: Team-level impact

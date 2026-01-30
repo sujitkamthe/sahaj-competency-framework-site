@@ -12,13 +12,13 @@ A static single-page website for "The Sahaj Field Guide to Growth & Impact" - an
 node build.js
 ```
 
-This reads Markdown files from `content/` and generates `data.js`. No external dependencies required.
+This scans Markdown files from `content/` and generates `manifest.json` (frontmatter + file paths). No external dependencies required.
 
 ## Development Workflow
 
 1. Edit Markdown files in `content/` (personas, capabilities, or home)
-2. Run `node build.js` to regenerate `data.js`
-3. Open `index.html` in a browser (no server required)
+2. Run `node build.js` to regenerate `manifest.json`
+3. Run `npm run dev` to start the dev server (required - site fetches content at runtime)
 
 ### Dev Server (watch + live reload)
 
@@ -26,27 +26,29 @@ This reads Markdown files from `content/` and generates `data.js`. No external d
 npm run dev
 ```
 
-This watches `content/*.md` for changes, rebuilds `data.js` automatically, and serves the site at `http://localhost:8080` with live reload.
+This watches `content/*.md` for changes, rebuilds `manifest.json` automatically, and serves the site at `http://localhost:8080` with live reload.
 
 ## Architecture
 
 **Content Pipeline:**
-- `content/*.md` → `build.js` → `data.js` → rendered by `app.js`
+- `content/*.md` → `build.js` → `manifest.json` → `app.js` fetches markdown at runtime and renders
 
 **Key Files:**
-- `build.js` - Node.js script that parses Markdown with YAML frontmatter, extracts structured data (personas, capabilities, expectations), and outputs `data.js`
-- `data.js` - Generated file containing `PERSONAS`, `CAPABILITIES`, `EXPECTATIONS`, `PERSONA_ORDER`, `CAPABILITY_ORDER` constants (do not edit directly)
-- `app.js` - Client-side SPA logic: hash-based routing, dynamic page rendering for persona/capability detail views, SVG diagram generation (impact rings, capability radar), dark mode toggle
-- `index.html` - Contains all static page shells; detail pages (`persona-*`, `capability-*`) are rendered dynamically by `app.js`
+- `build.js` - Scans markdown files, extracts frontmatter, outputs `manifest.json`
+- `manifest.json` - Generated file with page metadata and file paths (do not edit directly)
+- `app.js` - Client-side SPA: fetches markdown at runtime, parses content, renders via layout-based system, generates SVG diagrams from data
+- `index.html` - Minimal shell with `<main id="app">` container; pages created dynamically
 - `styles.css` - Styling with CSS custom properties, dark mode via `[data-theme="dark"]`
+- `content/icons/*.svg` - Capability icons referenced in frontmatter
 
 **Content Structure:**
-- Persona files (`content/personas/*.md`): frontmatter (id, name, years, tagline, color, order) + sections (Mindset, Nature of Impact, Success Looks Like) + capability expectations per persona
-- Capability files (`content/capabilities/*.md`): frontmatter + Description, Introduction, Note sections
+- Persona files (`content/personas/*.md`): frontmatter (layout, id, name, scope, tagline, color, order) + sections (Mindset, Nature of Impact, Success Looks Like) + capability expectations
+- Capability files (`content/capabilities/*.md`): frontmatter (layout, id, name, question, icon, order) + Description, Introduction, Note sections
+- Overview pages use annotations: `<!-- diagram: impact-rings -->`, `<!-- persona-cards -->`, `<!-- cards -->`
 
 **Routing:**
 - Hash-based SPA routing (e.g., `#home`, `#persona-explorer`, `#capability-technical`)
-- Detail pages are lazily rendered on first navigation
+- Pages created dynamically on first navigation
 
 ## Task Management
 

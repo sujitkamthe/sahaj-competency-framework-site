@@ -1,4 +1,5 @@
 ---
+layout: markdown-page
 title: How to Do Your Self-Assessment
 ---
 

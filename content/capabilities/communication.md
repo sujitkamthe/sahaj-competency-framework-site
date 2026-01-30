@@ -1,7 +1,9 @@
 ---
+layout: capability-detail
 id: communication
 name: Communication & Influence
 question: How far your impact travels
+icon: icons/communication.svg
 order: 5
 ---
 
