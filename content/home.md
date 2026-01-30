@@ -53,7 +53,7 @@ Before feedback or self-assessment can happen, **expectations must be set**.
 
 This is a conversation between you and your teammates. Use this guide as a reference point, not a rigid template:
 
-> "I'm expecting you to be able to take care of things like A, B, C, which is roughly what I'm visualising as an Artisan for our team."
+> "I'm expecting you to own stories end-to-end, ask why behind the work (not just how), and flag risks early, which is roughly what I'm visualising as an Artisan for our team."
 
 Expectations may differ from the guide based on your team's context. Some areas may need more depth, others less. What matters is that expectations are **explicit and agreed**, not assumed.
 

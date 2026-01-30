@@ -297,12 +297,14 @@ function parseParagraphSection(content) {
     return paragraphs;
 }
 
-// Parse a section with mixed content (paragraphs and lists)
+// Parse a section with mixed content (paragraphs, lists, blockquotes, ordered lists)
 function parseMixedSection(content) {
     const blocks = [];
     const lines = content.split('\n');
     let currentParagraph = '';
     let currentList = [];
+    let currentOrderedList = [];
+    let currentListType = null; // 'unordered' or 'ordered'
 
     function flushParagraph() {
         if (currentParagraph) {
@@ -316,16 +318,38 @@ function parseMixedSection(content) {
             blocks.push({ type: 'list', items: currentList });
             currentList = [];
         }
+        if (currentOrderedList.length > 0) {
+            blocks.push({ type: 'orderedList', items: currentOrderedList });
+            currentOrderedList = [];
+        }
+        currentListType = null;
     }
 
     for (const line of lines) {
         const trimmed = line.trim();
+        // Check for ordered list (1. 2. etc.)
+        const orderedMatch = trimmed.match(/^(\d+)\.\s+(.*)$/);
+
         if (trimmed === '') {
             flushParagraph();
             flushList();
-        } else if (trimmed.startsWith('- ')) {
+        } else if (trimmed.startsWith('> ')) {
+            // Blockquote
             flushParagraph();
+            flushList();
+            blocks.push({ type: 'blockquote', content: trimmed.substring(2).trim() });
+        } else if (trimmed.startsWith('- ')) {
+            // Unordered list
+            flushParagraph();
+            if (currentListType === 'ordered') flushList();
+            currentListType = 'unordered';
             currentList.push(trimmed.substring(2).trim());
+        } else if (orderedMatch) {
+            // Ordered list
+            flushParagraph();
+            if (currentListType === 'unordered') flushList();
+            currentListType = 'ordered';
+            currentOrderedList.push(orderedMatch[2].trim());
         } else if (!trimmed.startsWith('#')) {
             flushList();
             currentParagraph += (currentParagraph ? ' ' : '') + trimmed;

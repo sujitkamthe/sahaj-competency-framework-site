@@ -359,6 +359,10 @@
                             return `<p>${parseInlineMarkdown(block.content)}</p>`;
                         } else if (block.type === 'list') {
                             return `<ul>${block.items.map(item => `<li>${parseInlineMarkdown(item)}</li>`).join('')}</ul>`;
+                        } else if (block.type === 'orderedList') {
+                            return `<ol>${block.items.map(item => `<li>${parseInlineMarkdown(item)}</li>`).join('')}</ol>`;
+                        } else if (block.type === 'blockquote') {
+                            return `<blockquote><p>${parseInlineMarkdown(block.content)}</p></blockquote>`;
                         }
                         return '';
                     }).join('');
@@ -383,6 +387,10 @@
                     return `<p>${parseInlineMarkdown(block.content)}</p>`;
                 } else if (block.type === 'list') {
                     return `<ul class="balance-list">${block.items.map(item => `<li>${parseInlineMarkdown(item)}</li>`).join('')}</ul>`;
+                } else if (block.type === 'orderedList') {
+                    return `<ol class="balance-list">${block.items.map(item => `<li>${parseInlineMarkdown(item)}</li>`).join('')}</ol>`;
+                } else if (block.type === 'blockquote') {
+                    return `<blockquote><p>${parseInlineMarkdown(block.content)}</p></blockquote>`;
                 }
                 return '';
             }).join('');
@@ -548,6 +556,10 @@
                     return `<p>${parseInlineMarkdown(block.content)}</p>`;
                 } else if (block.type === 'list') {
                     return `<ul class="balance-list">${block.items.map(item => `<li>${parseInlineMarkdown(item)}</li>`).join('')}</ul>`;
+                } else if (block.type === 'orderedList') {
+                    return `<ol class="balance-list">${block.items.map(item => `<li>${parseInlineMarkdown(item)}</li>`).join('')}</ol>`;
+                } else if (block.type === 'blockquote') {
+                    return `<blockquote><p>${parseInlineMarkdown(block.content)}</p></blockquote>`;
                 }
                 return '';
             }).join('');
