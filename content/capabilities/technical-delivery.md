@@ -17,7 +17,7 @@ This capability area reflects Sahaj's belief that:
 
 - Engineering excellence is foundational
 - Clean code, sound design, and maintainability are non-negotiable
-- Polyglot capability is expected — backend, frontend, data, and infrastructure are part of the same system
+- Polyglot capability is expected: backend, frontend, data, and infrastructure are part of the same system
 
 Technical Delivery is not about cleverness or volume of code.
 

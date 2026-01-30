@@ -2,7 +2,7 @@
 title: Persona Anti-Patterns
 ---
 
-Common traps that signal expectations may be set too high — or that you're overestimating how well you met them.
+Common traps that signal expectations may be set too high, or that you're overestimating how well you met them.
 
 Use this section when **setting expectations** (are we being realistic?) and when **reflecting on feedback** (am I reading this correctly?). If multiple anti-patterns apply strongly, the expectations or your self-assessment may need adjustment.
 
@@ -126,4 +126,4 @@ Before finalising expectations or your self-assessment, ask:
 - Is my impact **person-dependent** or **system-dependent**?
 - Would others describe me at this persona level **without hesitation**?
 
-**Warning:** If the answer feels defensively justified rather than obvious, expectations may be set too high — or your self-assessment needs recalibration.
+**Warning:** If the answer feels defensively justified rather than obvious, expectations may be set too high, or your self-assessment needs recalibration.

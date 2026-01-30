@@ -2,17 +2,17 @@
 title: How to Do Your Self-Assessment
 ---
 
-This framework is designed to support **honest reflection**, not optimistic self-rating. The goal is to summarize your understanding of feedback you've received—not to claim a level or build a case.
+This framework is designed to support **honest reflection**, not optimistic self-rating. The goal is to summarize your understanding of feedback you've received, not to claim a level or build a case.
 
 ## How This Process Works
 
 Your self-assessment is a starting point, not a conclusion.
 
-Throughout your work, you receive feedback from teammates, leads, and stakeholders. This self-assessment is where you reflect on that feedback and show how you've processed it. The question isn't "what level am I?"—it's "did I meet the expectations my team set with me, and did I understand my feedback correctly?"
+Throughout your work, you receive feedback from teammates, leads, and stakeholders. This self-assessment is where you reflect on that feedback and show how you've processed it. The question isn't "what level am I?" It's "did I meet the expectations my team set with me, and did I understand my feedback correctly?"
 
 After you complete your assessment, teammates from your project and office will respond. They'll confirm your understanding, correct misreadings, or add perspective you may have missed. You'll do the same for them. This is mutual calibration, not one-way review.
 
-Everyone in your office sees these assessments. This transparency means overstating doesn't work—your teammates know your work. It also means you can be honest about uncertainty. Saying "I'm not sure I've read this right" invites useful correction. Treating it as a case to defend invites scrutiny.
+Everyone in your office sees these assessments. This transparency means overstating doesn't work: your teammates know your work. It also means you can be honest about uncertainty. Saying "I'm not sure I've read this right" invites useful correction. Treating it as a case to defend invites scrutiny.
 
 ## Before You Begin
 
@@ -30,7 +30,7 @@ If you're unsure, check with your teammates before proceeding. Self-assessment a
 
 Think about the feedback you've received since expectations were set.
 
-- What have teammates, leads, or stakeholders told you—directly or indirectly?
+- What have teammates, leads, or stakeholders told you, directly or indirectly?
 - Where have you heard consistent themes?
 - What's changed in how others rely on you?
 
@@ -40,7 +40,7 @@ This step is about listening, not advocating. Your self-assessment should demons
 
 For each capability area relevant to your expectations, rate yourself: **Below Expectations**, **Meets Expectations**, or **Exceeds Expectations**.
 
-You're rating against what was agreed with your team—not against a generic persona definition.
+You're rating against what was agreed with your team, not against a generic persona definition.
 
 ### Below Expectations
 
@@ -107,7 +107,7 @@ Your self-assessment goes to your teammates and office. They'll review it and re
 
 **You'll do the same for them.** Review their self-assessments. Confirm, challenge, or add nuance based on your experience working with them.
 
-This mutual calibration is where clarity emerges—not from your self-assessment alone.
+This mutual calibration is where clarity emerges, not from your self-assessment alone.
 
 ## Common Traps
 
@@ -121,7 +121,7 @@ Some people default to "below expectations" out of modesty. If feedback was posi
 
 ### Defending Instead of Reflecting
 
-If you find yourself building a case or justifying, pause. The goal is to show you understood your feedback—not to argue you deserved better.
+If you find yourself building a case or justifying, pause. The goal is to show you understood your feedback, not to argue you deserved better.
 
 ### Missing the Conversation
 

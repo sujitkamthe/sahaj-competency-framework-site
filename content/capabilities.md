@@ -19,6 +19,6 @@ No single capability area is sufficient on its own.
 
 Sustainable growth at Sahaj comes from **balanced expansion across capability areas over time**, with different capability areas becoming more prominent at different stages.
 
-**Your weakest capability sets your ceiling.** If you demonstrate Artisan-level Technical Delivery but Explorer-level Consulting, you're operating as an Explorer overall — not an Artisan with a gap.
+**Your weakest capability sets your ceiling.** If you demonstrate Artisan-level Technical Delivery but Explorer-level Consulting, you're operating as an Explorer overall, not an Artisan with a gap.
 
-Early on, gaps are hard to see — the scope is smaller, the stakes are lower. Around Catalyst level, gaps become obvious. You're shaping direction, working with stakeholders, leading others. Blind spots show.
+Early on, gaps are hard to see: the scope is smaller, the stakes are lower. Around Catalyst level, gaps become obvious. You're shaping direction, working with stakeholders, leading others. Blind spots show.

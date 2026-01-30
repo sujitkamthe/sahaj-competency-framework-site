@@ -25,10 +25,10 @@ Some engineers primarily execute well-defined work.
 
 Others actively shape what should be built and why.
 
-Both are valuable — but they are not the same kind of impact.
+Both are valuable, but they are not the same kind of impact.
 
 Growth at Sahaj requires moving from receiving clarity to building your own. Early on, others share context and direction. The expectation is that you build your own clarity quickly.
 
 ## Note
 
-The expectations below describe what Consulting looks like in practice — use them to check if expectations are realistic and to reflect on feedback.
+The expectations below describe what Consulting looks like in practice. Use them to check if expectations are realistic and to reflect on feedback.
