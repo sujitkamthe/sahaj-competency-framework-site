@@ -57,6 +57,19 @@
                 e.preventDefault();
                 const pageId = link.getAttribute('data-page');
                 navigateTo(pageId);
+                return;
+            }
+
+            // Handle internal hash links (e.g., #home/section-name)
+            const anchor = e.target.closest('a[href^="#"]');
+            if (anchor && !anchor.hasAttribute('data-page')) {
+                const href = anchor.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                    const hash = href.slice(1);
+                    const [pageId, sectionId] = hash.split('/');
+                    navigateTo(pageId, true, sectionId || null);
+                }
             }
         });
 
@@ -67,9 +80,10 @@
             }
         });
 
-        // Handle initial page from URL hash
+        // Handle initial page from URL hash (supports #page/section format)
         const hash = window.location.hash.slice(1) || 'home';
-        navigateTo(hash, false);
+        const [pageId, sectionId] = hash.split('/');
+        navigateTo(pageId, false, sectionId);
 
         // Mobile menu toggle
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
@@ -89,11 +103,11 @@
         }
     }
 
-    function navigateTo(pageId, pushState = true) {
-        showPage(pageId, pushState);
+    function navigateTo(pageId, pushState = true, sectionId = null) {
+        showPage(pageId, pushState, sectionId);
     }
 
-    function showPage(pageId, pushState = true) {
+    function showPage(pageId, pushState = true, sectionId = null) {
         // Hide all pages
         document.querySelectorAll('.page').forEach(page => {
             page.classList.remove('active');
@@ -131,12 +145,24 @@
 
             targetPage.classList.add('active');
 
-            // Scroll to top
-            window.scrollTo(0, 0);
+            // Scroll to section if specified, otherwise scroll to top
+            if (sectionId) {
+                const sectionElement = targetPage.querySelector('#' + sectionId) ||
+                    targetPage.querySelector('[id="' + sectionId + '"]');
+                if (sectionElement) {
+                    // Small delay to ensure rendering is complete
+                    setTimeout(() => sectionElement.scrollIntoView({ behavior: 'smooth' }), 50);
+                } else {
+                    window.scrollTo(0, 0);
+                }
+            } else {
+                window.scrollTo(0, 0);
+            }
 
-            // Update URL
+            // Update URL (include section if present)
             if (pushState) {
-                history.pushState({ page: pageId }, '', '#' + pageId);
+                const hashUrl = sectionId ? '#' + pageId + '/' + sectionId : '#' + pageId;
+                history.pushState({ page: pageId, section: sectionId }, '', hashUrl);
             }
         }
 
@@ -152,8 +178,18 @@
     // Inline Markdown Parser
     // ============================================
 
+    function slugify(text) {
+        return text
+            .toLowerCase()
+            .replace(/[^a-z0-9\s-]/g, '')  // Remove special characters
+            .replace(/\s+/g, '-')           // Replace spaces with hyphens
+            .replace(/-+/g, '-')            // Replace multiple hyphens with single
+            .trim();
+    }
+
     function parseInlineMarkdown(text) {
         return text
+            .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
             .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
             .replace(/\*([^*]+)\*/g, '<em>$1</em>');
     }
@@ -185,15 +221,23 @@
                 inTable = false;
             }
 
-            // Headers
+            // Headers (with auto-generated IDs for linking)
             if (line.startsWith('##### ')) {
-                html += `<h5>${parseInlineMarkdown(line.substring(6))}</h5>\n`;
+                const text = line.substring(6);
+                const id = slugify(text);
+                html += `<h5 id="${id}">${parseInlineMarkdown(text)}</h5>\n`;
             } else if (line.startsWith('#### ')) {
-                html += `<h4>${parseInlineMarkdown(line.substring(5))}</h4>\n`;
+                const text = line.substring(5);
+                const id = slugify(text);
+                html += `<h4 id="${id}">${parseInlineMarkdown(text)}</h4>\n`;
             } else if (line.startsWith('### ')) {
-                html += `<h3>${parseInlineMarkdown(line.substring(4))}</h3>\n`;
+                const text = line.substring(4);
+                const id = slugify(text);
+                html += `<h3 id="${id}">${parseInlineMarkdown(text)}</h3>\n`;
             } else if (line.startsWith('## ')) {
-                html += `<h2>${parseInlineMarkdown(line.substring(3))}</h2>\n`;
+                const text = line.substring(3);
+                const id = slugify(text);
+                html += `<h2 id="${id}">${parseInlineMarkdown(text)}</h2>\n`;
             }
             // Blockquotes
             else if (line.startsWith('> ')) {
@@ -297,15 +341,39 @@
 
         // Usage section
         if (home.sections.usage) {
-            html += `
+            let usageHtml = `
                 <section class="usage-section">
                     <h2>${home.sections.usage.heading}</h2>
                     <ul class="usage-list">
                         ${home.sections.usage.items.map(item => `<li>${parseInlineMarkdown(item)}</li>`).join('')}
                     </ul>
                     ${home.sections.usage.highlight ? `<p class="highlight-box">${parseInlineMarkdown(home.sections.usage.highlight)}</p>` : ''}
-                </section>
             `;
+
+            // Render subsections with IDs for deep linking
+            if (home.sections.usage.subsections) {
+                home.sections.usage.subsections.forEach(subsection => {
+                    const sectionId = slugify(subsection.heading);
+                    const blocksHtml = subsection.blocks.map(block => {
+                        if (block.type === 'paragraph') {
+                            return `<p>${parseInlineMarkdown(block.content)}</p>`;
+                        } else if (block.type === 'list') {
+                            return `<ul>${block.items.map(item => `<li>${parseInlineMarkdown(item)}</li>`).join('')}</ul>`;
+                        }
+                        return '';
+                    }).join('');
+
+                    usageHtml += `
+                        <div class="usage-subsection" id="${sectionId}">
+                            <h3>${subsection.heading}</h3>
+                            ${blocksHtml}
+                        </div>
+                    `;
+                });
+            }
+
+            usageHtml += `</section>`;
+            html += usageHtml;
         }
 
         // Balance section (How the Capability Areas Work Together)

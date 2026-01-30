@@ -214,17 +214,27 @@ function parseValuesSection(content) {
     return cards;
 }
 
-// Parse usage section (list items + final paragraph as highlight)
+// Parse usage section (list items + final paragraph as highlight + subsections)
 function parseUsageSection(content) {
-    const items = [];
-    const lines = content.split('\n');
-    let highlight = '';
+    const result = {
+        items: [],
+        highlight: '',
+        subsections: []
+    };
+
+    // Split by h3 headers to extract subsections
+    const h3Regex = /^### (.+)$/gm;
+    const parts = content.split(h3Regex);
+
+    // First part is the main content (before any ### headers)
+    const mainContent = parts[0];
+    const lines = mainContent.split('\n');
     let lastNonEmptyLine = '';
 
     for (const line of lines) {
         const trimmed = line.trim();
         if (trimmed.startsWith('- ')) {
-            items.push(trimmed.substring(2).trim());
+            result.items.push(trimmed.substring(2).trim());
         } else if (trimmed && !trimmed.startsWith('#')) {
             lastNonEmptyLine = trimmed;
         }
@@ -232,10 +242,22 @@ function parseUsageSection(content) {
 
     // The last non-list paragraph is the highlight
     if (lastNonEmptyLine && !lastNonEmptyLine.startsWith('- ')) {
-        highlight = lastNonEmptyLine;
+        result.highlight = lastNonEmptyLine;
     }
 
-    return { items, highlight };
+    // Parse subsections (### headers and their content)
+    for (let i = 1; i < parts.length; i += 2) {
+        const heading = parts[i]?.trim();
+        const sectionContent = parts[i + 1]?.trim();
+        if (heading && sectionContent) {
+            result.subsections.push({
+                heading: heading,
+                blocks: parseMixedSection(sectionContent)
+            });
+        }
+    }
+
+    return result;
 }
 
 // Parse a section with list items
@@ -363,7 +385,8 @@ function parseHomeFile(content) {
         home.sections.usage = {
             heading: 'How to Use This Framework',
             items: usage.items,
-            highlight: usage.highlight
+            highlight: usage.highlight,
+            subsections: usage.subsections
         };
     }
 
@@ -388,10 +411,10 @@ function parseHomeFile(content) {
         };
     }
 
-    if (sectionMap['How to Self-Assess Honestly']) {
+    if (sectionMap['Honest Reflection']) {
         home.sections.selfAssess = {
-            heading: 'How to Self-Assess Honestly',
-            items: parseListSection(sectionMap['How to Self-Assess Honestly'])
+            heading: 'Honest Reflection',
+            items: parseListSection(sectionMap['Honest Reflection'])
         };
     }
 

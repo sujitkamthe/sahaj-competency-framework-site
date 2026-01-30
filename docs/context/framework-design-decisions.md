@@ -35,12 +35,62 @@ Personas are not titles or levels. They describe the **nature of your contributi
 
 ## How Assessment Works
 
-### The Process
-1. Individuals collect feedback from everyone they work with (teams, cross-team, other initiatives)
-2. They update their self-assessment on a **public sheet** and announce who provided feedback
-3. Feedback providers who disagree (or missed giving feedback) have conversations with the individual
-4. The **entire office reviews all self-assessments as a group** to surface disagreements
-5. Disagreements are discussed **privately**; resulting changes are **public**
+### The Dependency Chain
+
+**Personas → Expectations → Feedback → Self-Assessment**
+
+This sequence is critical. Each step depends on the previous one:
+
+1. **Personas** provide shared vocabulary for what impact looks like at different stages
+2. **Expectations** are set in conversations between teammates, using personas as a reference (not a rigid template)
+3. **Feedback** is given throughout work against those agreed expectations
+4. **Self-Assessment** is a reflection on that feedback — demonstrating you've processed it correctly
+
+### What Self-Assessment Is (and Isn't)
+
+**Self-assessment is NOT:**
+- Claiming a persona level ("I'm a Catalyst")
+- Building a case for compensation
+- Rating yourself against generic persona definitions
+
+**Self-assessment IS:**
+- Reflecting on feedback you've received
+- Summarizing your understanding: "Here's what I think my feedback told me"
+- Checking with teammates: "Did I process this correctly?"
+
+The rating (below / met / exceeded expectations) is against expectations your team set with you — not against a fixed persona definition.
+
+### How Expectations Get Set
+
+During expectation-setting, teammates discuss what's expected using the field guide as a reference:
+
+> "I'm expecting you to be able to take care of things like A, B, C — which is roughly what I'm visualizing as an Artisan for our team."
+
+Key points:
+- The field guide supports this conversation; it doesn't replace it
+- Expectations may differ from the guide based on team context (more depth in some areas, less in others)
+- Most expectations should be explicit; implicit expectations cause trouble
+- Expectations are fluid and change based on team needs
+
+### The Assessment Process
+
+1. **Expectations are set** — teammates discuss what's expected, using personas as a guide
+2. **Work happens** — with ongoing feedback throughout
+3. **Self-assessment** — individual reflects on feedback and summarizes their understanding
+4. **Calibration** — teammates review the self-assessment and respond:
+   - Confirm where understanding matches
+   - Correct where feedback was misread
+   - Add perspective that was missed
+5. **Mutual** — individuals do this for each other, not just receive it
+6. **Office review** — entire office reviews all self-assessments as a group to surface disagreements
+7. **Refinement** — disagreements discussed privately; resulting changes are public
+
+### Why Transparency Matters
+
+Everyone in the office sees self-assessments. This transparency:
+- Prevents overstating (teammates know your work)
+- Allows honest uncertainty ("I'm not sure I read this right" invites correction)
+- Creates accountability for feedback quality
 
 ### Participants
 - The individual
@@ -52,11 +102,9 @@ Personas are not titles or levels. They describe the **nature of your contributi
 - Multiple offices exist
 - Office leads sync up to ensure consistency across offices
 
-### Current State (Pre-Framework)
-- Self-assessment uses "below / met / exceeded expectations"
-- Expectations are set by teammates (inconsistent across teams)
-- No shared vocabulary or persona language yet
-- Freeform feedback (hoping framework adds structure)
+### Frequency
+- Office-wide: quarterly
+- Teams may do it more often (some monthly)
 
 ### Compensation
 Personas are tied to compensation bands. Higher impact = higher compensation.

@@ -2,13 +2,15 @@
 title: Persona Anti-Patterns
 ---
 
-Common self-overrating traps. Use this section to **stress-test your persona choice**. If multiple anti-patterns apply strongly to you, you are likely rating yourself one persona too high.
+Common traps that signal expectations may be set too high — or that you're overestimating how well you met them.
+
+Use this section when **setting expectations** (are we being realistic?) and when **reflecting on feedback** (am I reading this correctly?). If multiple anti-patterns apply strongly, the expectations or your self-assessment may need adjustment.
 
 ## Explorer Anti-Patterns
 
 **Motto:** "Learning ≠ Operating"
 
-### Common traps when rating yourself too high:
+### Signs expectations may be too high:
 
 - Confusing exposure with competence ("I've seen this before")
 - Relying on step-by-step guidance but framing it as independence
@@ -22,13 +24,13 @@ Common self-overrating traps. Use this section to **stress-test your persona cho
 - You struggle to explain why something works
 - You need rework when conditions change slightly
 
-**Verdict:** If this applies, you are still **Explorer**, not Artisan.
+**Signal:** If these patterns apply, Explorer-level expectations are more realistic than Artisan.
 
 ## Artisan Anti-Patterns
 
 **Motto:** "Strong Execution ≠ Expanded Impact"
 
-### Common traps when rating yourself too high:
+### Signs expectations may be too high:
 
 - Mistaking high-quality delivery for broader ownership
 - Being the "go-to person" because of availability, not leverage
@@ -42,13 +44,13 @@ Common self-overrating traps. Use this section to **stress-test your persona cho
 - You execute well but rarely shape the approach
 - Teams depend on you to do, not to enable
 
-**Verdict:** If this applies, you are **Artisan**, not Catalyst.
+**Signal:** If these patterns apply, Artisan-level expectations are more realistic than Catalyst.
 
 ## Catalyst Anti-Patterns
 
 **Motto:** "Helping ≠ Enabling at Scale"
 
-### Common traps when rating yourself too high:
+### Signs expectations may be too high:
 
 - Acting as a human bridge instead of fixing broken systems
 - Being involved in many things, but owning few outcomes end-to-end
@@ -62,13 +64,13 @@ Common self-overrating traps. Use this section to **stress-test your persona cho
 - Others still rely on you to connect dots
 - Improvements don't survive beyond the project
 
-**Verdict:** If this applies, you are **Catalyst**, not Multiplier.
+**Signal:** If these patterns apply, Catalyst-level expectations are more realistic than Multiplier.
 
 ## Multiplier Anti-Patterns
 
 **Motto:** "Delegation ≠ Multiplication"
 
-### Common traps when rating yourself too high:
+### Signs expectations may be too high:
 
 - Delegating tasks without transferring context or judgment
 - Mentoring individuals but not improving team capability overall
@@ -82,13 +84,13 @@ Common self-overrating traps. Use this section to **stress-test your persona cho
 - Teams execute because of you, not independently
 - Success is fragile and person-dependent
 
-**Verdict:** If this applies, you are **Multiplier**, not Strategist.
+**Signal:** If these patterns apply, Multiplier-level expectations are more realistic than Strategist.
 
 ## Strategist Anti-Patterns
 
 **Motto:** "Direction Setting ≠ Durable Strategy"
 
-### Common traps when rating yourself too high:
+### Signs expectations may be too high:
 
 - Producing narratives without changing execution reality
 - Defining vision without aligning incentives or constraints
@@ -102,7 +104,7 @@ Common self-overrating traps. Use this section to **stress-test your persona cho
 - Teams interpret direction differently
 - Results lag despite clear messaging
 
-**Verdict:** If this applies, you may still be **Multiplier**, not Strategist.
+**Signal:** If these patterns apply, Multiplier-level expectations may be more realistic than Strategist.
 
 ## Universal Over-Rating Signals
 
@@ -118,10 +120,10 @@ If you notice these patterns, pause and reassess:
 
 ## Final Self-Check
 
-Before finalising your persona, ask:
+Before finalising expectations or your self-assessment, ask:
 
 - If I stepped away for 3 months, what would **break** vs **persist**?
 - Is my impact **person-dependent** or **system-dependent**?
 - Would others describe me at this persona level **without hesitation**?
 
-**Warning:** If the answer feels defensively justified rather than obvious, you're likely one level too high.
+**Warning:** If the answer feels defensively justified rather than obvious, expectations may be set too high — or your self-assessment needs recalibration.

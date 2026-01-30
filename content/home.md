@@ -37,17 +37,41 @@ In a culture with open conversations and open salaries, expectations must be exp
 
 ## How to Use This Framework
 
-- This is **not a checklist** and not everyone will excel in all areas at once.
-- Expectations **increase in depth and scope**, not simply in quantity of work.
-- Growth happens by **expanding impact across multiple dimensions** over time.
-- Each section includes prompting questions to help with **unbiased self-reflection**, focused on outcomes rather than effort.
+This guide supports conversations, not conclusions. Use it when:
+
+- **Setting expectations** — Discuss with teammates what's expected of you, using personas as a reference point.
+- **Giving and receiving feedback** — Reference capability areas to make feedback specific and actionable.
+- **Reflecting on growth** — Understand where your impact shows up and where gaps might exist.
+
+This is **not a checklist**. Expectations increase in depth and scope, not simply in quantity of work. Growth happens by expanding impact across multiple dimensions over time.
 
 Most importantly, this framework is meant to support **thoughtful, self-owned conversations**—about growth, impact, and contribution—without hiding behind titles, years of experience, or vague notions of seniority.
+
+### Setting Expectations Comes First
+
+Before feedback or self-assessment can happen, **expectations must be set**.
+
+This is a conversation between you and your teammates. Use this guide as a reference point, not a rigid template:
+
+> "I'm expecting you to be able to take care of things like A, B, C — which is roughly what I'm visualising as an Artisan for our team."
+
+Expectations may differ from the guide based on your team's context. Some areas may need more depth, others less. What matters is that expectations are **explicit and agreed**, not assumed.
+
+If expectations were never made explicit, that's a gap to address first. Implicit expectations cause trouble — during feedback, during self-assessment, and during calibration. This guide should help make those conversations easier and more consistent.
+
+### The Flow
+
+1. **Expectations are set** — using this guide as a reference
+2. **Work happens** — with ongoing feedback against those expectations
+3. **Self-assessment** — you reflect on feedback and summarize your understanding
+4. **Calibration** — teammates confirm, correct, or add perspective
+
+Each step depends on the previous one. Self-assessment without clear expectations is guesswork. Feedback without shared vocabulary is inconsistent.
 
 ## Key Truths
 
 - Delivery-only excellence has a **growth ceiling**
-- All five capabilities matter — **Consulting is where self-assessment is hardest**
+- All five capabilities matter — **Consulting is where calibration is hardest** (everyone thinks they consult; few actually do)
 - Seniority is demonstrated by **sustained impact**, not effort
 - You are not expected to excel in everything at once
 - Growth is about expanding impact across capabilities over time
@@ -58,12 +82,12 @@ This guide is designed for **people in delivery roles** — engineers, tech lead
 
 If you're in a different role (operations, sales, design, etc.), some principles may apply, but the specific expectations won't map directly. **We're working on expanding coverage.** For now, talk to your office lead about growth paths for your role.
 
-## How to Self-Assess Honestly
+## Honest Reflection
 
-- Look for **outcomes**, not activity
-- Ask: *What changed because of me?*
-- If your evidence is mostly effort, you're likely overestimating
-- Use feedback from peers and stakeholders to validate self-view
+- Self-assessment is about **processing feedback**, not claiming a level
+- Ask: *Did I understand what others told me?*
+- Focus on **outcomes**, not activity — what changed because of you?
+- If your teammates would describe your impact differently than you do, trust their perspective
 
 ## Explicit Growth Principle
 
