@@ -390,41 +390,20 @@ function parseHomeFile(content) {
     }
 
     // Parse each section into structured data
-    if (sectionMap['How to Read These Expectations']) {
+    if (sectionMap['What This Guide Is For']) {
         home.sections.intro = {
-            heading: 'How to Read These Expectations',
-            paragraphs: parseParagraphSection(sectionMap['How to Read These Expectations'])
+            heading: 'What This Guide Is For',
+            paragraphs: parseParagraphSection(sectionMap['What This Guide Is For'])
         };
     }
 
-    if (sectionMap['What We Value']) {
-        home.sections.values = {
-            heading: 'What We Value',
-            cards: parseValuesSection(sectionMap['What We Value'])
-        };
-    }
-
-    if (sectionMap['How to Use This Framework']) {
-        const usage = parseUsageSection(sectionMap['How to Use This Framework']);
+    if (sectionMap['How to Use This Guide']) {
+        const usage = parseUsageSection(sectionMap['How to Use This Guide']);
         home.sections.usage = {
-            heading: 'How to Use This Framework',
+            heading: 'How to Use This Guide',
             items: usage.items,
             highlight: usage.highlight,
             subsections: usage.subsections
-        };
-    }
-
-    if (sectionMap['How the Capability Areas Work Together']) {
-        home.sections.balance = {
-            heading: 'How the Capability Areas Work Together',
-            blocks: parseMixedSection(sectionMap['How the Capability Areas Work Together'])
-        };
-    }
-
-    if (sectionMap['Key Truths']) {
-        home.sections.keyTruths = {
-            heading: 'Key Truths',
-            items: parseListSection(sectionMap['Key Truths'])
         };
     }
 
@@ -435,17 +414,17 @@ function parseHomeFile(content) {
         };
     }
 
-    if (sectionMap['Honest Reflection']) {
-        home.sections.selfAssess = {
-            heading: 'Honest Reflection',
-            items: parseListSection(sectionMap['Honest Reflection'])
+    if (sectionMap['What We Value']) {
+        home.sections.values = {
+            heading: 'What We Value',
+            cards: parseValuesSection(sectionMap['What We Value'])
         };
     }
 
-    if (sectionMap['Explicit Growth Principle']) {
-        home.sections.growthPrinciple = {
-            heading: 'Explicit Growth Principle',
-            paragraphs: parseParagraphSection(sectionMap['Explicit Growth Principle'])
+    if (sectionMap['Key Truths']) {
+        home.sections.keyTruths = {
+            heading: 'Key Truths',
+            items: parseListSection(sectionMap['Key Truths'])
         };
     }
 

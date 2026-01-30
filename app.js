@@ -312,7 +312,7 @@
             <div class="container">
         `;
 
-        // Intro section
+        // 1. Intro section (What This Guide Is For)
         if (home.sections.intro) {
             html += `
                 <section class="intro-section">
@@ -322,24 +322,7 @@
             `;
         }
 
-        // Values section
-        if (home.sections.values) {
-            html += `
-                <section class="values-section">
-                    <h2>${home.sections.values.heading}</h2>
-                    <div class="values-grid">
-                        ${home.sections.values.cards.map(card => `
-                            <div class="value-card">
-                                <h3>${card.title}</h3>
-                                <p>${parseInlineMarkdown(card.description)}</p>
-                            </div>
-                        `).join('')}
-                    </div>
-                </section>
-            `;
-        }
-
-        // Usage section
+        // 2. Usage section (How to Use This Guide)
         if (home.sections.usage) {
             let usageHtml = `
                 <section class="usage-section">
@@ -380,30 +363,34 @@
             html += usageHtml;
         }
 
-        // Balance section (How the Capability Areas Work Together)
-        if (home.sections.balance) {
-            const balanceContent = home.sections.balance.blocks.map(block => {
-                if (block.type === 'paragraph') {
-                    return `<p>${parseInlineMarkdown(block.content)}</p>`;
-                } else if (block.type === 'list') {
-                    return `<ul class="balance-list">${block.items.map(item => `<li>${parseInlineMarkdown(item)}</li>`).join('')}</ul>`;
-                } else if (block.type === 'orderedList') {
-                    return `<ol class="balance-list">${block.items.map(item => `<li>${parseInlineMarkdown(item)}</li>`).join('')}</ol>`;
-                } else if (block.type === 'blockquote') {
-                    return `<blockquote><p>${parseInlineMarkdown(block.content)}</p></blockquote>`;
-                }
-                return '';
-            }).join('');
-
+        // 3. Who This Guide Is For section
+        if (home.sections.whoFor) {
             html += `
-                <section class="balance-section">
-                    <h2>${home.sections.balance.heading}</h2>
-                    ${balanceContent}
+                <section class="who-for-section">
+                    <h2>${home.sections.whoFor.heading}</h2>
+                    ${home.sections.whoFor.paragraphs.map(p => `<p>${parseInlineMarkdown(p)}</p>`).join('')}
                 </section>
             `;
         }
 
-        // Key Truths section
+        // 4. Values section (What We Value)
+        if (home.sections.values) {
+            html += `
+                <section class="values-section">
+                    <h2>${home.sections.values.heading}</h2>
+                    <div class="values-grid">
+                        ${home.sections.values.cards.map(card => `
+                            <div class="value-card">
+                                <h3>${card.title}</h3>
+                                <p>${parseInlineMarkdown(card.description)}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </section>
+            `;
+        }
+
+        // 5. Key Truths section
         if (home.sections.keyTruths) {
             html += `
                 <section class="key-truths-section">
@@ -415,39 +402,7 @@
             `;
         }
 
-        // Who This Guide Is For section
-        if (home.sections.whoFor) {
-            html += `
-                <section class="who-for-section">
-                    <h2>${home.sections.whoFor.heading}</h2>
-                    ${home.sections.whoFor.paragraphs.map(p => `<p>${parseInlineMarkdown(p)}</p>`).join('')}
-                </section>
-            `;
-        }
-
-        // Self-Assess section
-        if (home.sections.selfAssess) {
-            html += `
-                <section class="self-assess-section">
-                    <h2>${home.sections.selfAssess.heading}</h2>
-                    <ul class="self-assess-list">
-                        ${home.sections.selfAssess.items.map(item => `<li>${parseInlineMarkdown(item)}</li>`).join('')}
-                    </ul>
-                </section>
-            `;
-        }
-
-        // Growth Principle section
-        if (home.sections.growthPrinciple) {
-            html += `
-                <section class="growth-principle-section">
-                    <h2>${home.sections.growthPrinciple.heading}</h2>
-                    ${home.sections.growthPrinciple.paragraphs.map(p => `<p class="highlight-box">${parseInlineMarkdown(p)}</p>`).join('')}
-                </section>
-            `;
-        }
-
-        // Explore cards section
+        // 6. Explore cards section
         if (home.exploreCards && home.exploreCards.length > 0) {
             html += `
                 <section class="explore-section">
