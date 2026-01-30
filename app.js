@@ -11,6 +11,7 @@
     let manifest = null;
     const contentCache = {};
     const iconCache = {};
+    let svgColorsCache = null;
 
     // ============================================
     // Initialization
@@ -1273,16 +1274,18 @@
     // SVG Diagrams (Data-Driven)
     // ============================================
 
-    // Get theme-aware colors for SVG rendering
+    // Get theme-aware colors for SVG rendering (cached to avoid reflows)
     function getSvgColors() {
+        if (svgColorsCache) {
+            return svgColorsCache;
+        }
         const styles = getComputedStyle(document.documentElement);
-        return {
+        svgColorsCache = {
             text: styles.getPropertyValue('--color-text').trim(),
             textSecondary: styles.getPropertyValue('--color-text-secondary').trim(),
             textMuted: styles.getPropertyValue('--color-text-muted').trim(),
             border: styles.getPropertyValue('--color-border').trim(),
             accent: styles.getPropertyValue('--color-accent').trim(),
-            // Persona colors (these change in dark mode)
             explorer: styles.getPropertyValue('--color-explorer').trim(),
             artisan: styles.getPropertyValue('--color-artisan').trim(),
             catalyst: styles.getPropertyValue('--color-catalyst').trim(),
@@ -1291,6 +1294,7 @@
             amplifier: styles.getPropertyValue('--color-amplifier').trim(),
             pioneer: styles.getPropertyValue('--color-pioneer').trim()
         };
+        return svgColorsCache;
     }
 
     function getPersonaColor(personaId) {
@@ -1540,7 +1544,9 @@
     }
 
     function refreshSvgDiagrams() {
-        // Clear and re-render SVG diagrams to pick up new theme colors
+        // Invalidate color cache so new theme colors are picked up
+        svgColorsCache = null;
+
         const radar = document.getElementById('capability-radar');
         if (radar) {
             radar.innerHTML = '';
