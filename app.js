@@ -1059,10 +1059,34 @@
     // SVG Diagrams (Data-Driven)
     // ============================================
 
+    // Get theme-aware colors for SVG rendering
+    function getSvgColors() {
+        const styles = getComputedStyle(document.documentElement);
+        return {
+            text: styles.getPropertyValue('--color-text').trim(),
+            textSecondary: styles.getPropertyValue('--color-text-secondary').trim(),
+            textMuted: styles.getPropertyValue('--color-text-muted').trim(),
+            border: styles.getPropertyValue('--color-border').trim(),
+            accent: styles.getPropertyValue('--color-accent').trim(),
+            // Persona colors (these change in dark mode)
+            explorer: styles.getPropertyValue('--color-explorer').trim(),
+            artisan: styles.getPropertyValue('--color-artisan').trim(),
+            catalyst: styles.getPropertyValue('--color-catalyst').trim(),
+            multiplier: styles.getPropertyValue('--color-multiplier').trim(),
+            strategist: styles.getPropertyValue('--color-strategist').trim()
+        };
+    }
+
+    function getPersonaColor(personaId) {
+        const colors = getSvgColors();
+        return colors[personaId] || '#888';
+    }
+
     function renderCapabilityRadar() {
         const svg = document.getElementById('capability-radar');
         if (!svg || svg.querySelector('circle')) return;
 
+        const colors = getSvgColors();
         const cx = 250;
         const cy = 200;
         const maxRadius = 150;
@@ -1082,7 +1106,7 @@
         // Draw level circles
         for (let i = 1; i <= levels; i++) {
             const r = (maxRadius / levels) * i;
-            html += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#e0e0e0" stroke-width="1"/>`;
+            html += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${colors.border}" stroke-width="1"/>`;
         }
 
         // Draw axes and labels
@@ -1091,7 +1115,7 @@
             const x2 = cx + maxRadius * Math.cos(angleRad);
             const y2 = cy + maxRadius * Math.sin(angleRad);
 
-            html += `<line x1="${cx}" y1="${cy}" x2="${x2}" y2="${y2}" stroke="#e0e0e0" stroke-width="1"/>`;
+            html += `<line x1="${cx}" y1="${cy}" x2="${x2}" y2="${y2}" stroke="${colors.border}" stroke-width="1"/>`;
 
             const labelX = cx + (maxRadius + 35) * Math.cos(angleRad);
             const labelY = cy + (maxRadius + 35) * Math.sin(angleRad);
@@ -1102,7 +1126,7 @@
 
             lines.forEach((line, lineIndex) => {
                 html += `<text x="${labelX}" y="${startY + lineIndex * lineHeight}"
-                    text-anchor="middle" font-size="12" fill="#555">${line}</text>`;
+                    text-anchor="middle" font-size="12" fill="${colors.textSecondary}">${line}</text>`;
             });
         });
 
@@ -1118,14 +1142,14 @@
             points += `${x},${y} `;
         });
 
-        html += `<polygon points="${points.trim()}" fill="rgba(44, 62, 80, 0.2)" stroke="#2c3e50" stroke-width="2"/>`;
+        html += `<polygon points="${points.trim()}" fill="${colors.accent}" fill-opacity="0.15" stroke="${colors.accent}" stroke-width="2"/>`;
 
         labels.forEach((label, index) => {
             const angleRad = (label.angle * Math.PI) / 180;
             const r = maxRadius * sampleValues[index];
             const x = cx + r * Math.cos(angleRad);
             const y = cy + r * Math.sin(angleRad);
-            html += `<circle cx="${x}" cy="${y}" r="5" fill="#2c3e50"/>`;
+            html += `<circle cx="${x}" cy="${y}" r="5" fill="${colors.accent}"/>`;
         });
 
         svg.innerHTML = html;
@@ -1135,10 +1159,11 @@
         const svg = document.getElementById('impact-rings');
         if (!svg || svg.querySelector('circle')) return;
 
+        const colors = getSvgColors();
         const cx = 200;
         const cy = 200;
 
-        // Build rings from manifest
+        // Build rings from manifest using theme-aware colors
         const personas = manifest.personas.map(id => manifest.pages[`persona-${id}`]);
         const baseRadius = 32;
         const radiusStep = 24;
@@ -1147,16 +1172,16 @@
             name: p.name,
             scope: p.scope.replace(' impact', ''),
             radius: baseRadius + (i * radiusStep),
-            color: p.color
+            color: getPersonaColor(p.id)
         }));
 
         let html = '';
 
         // Title
-        html += `<text x="290" y="28" text-anchor="middle" font-size="13" fill="#333" font-weight="600" font-family="Inter, sans-serif">
+        html += `<text x="290" y="28" text-anchor="middle" font-size="13" fill="${colors.text}" font-weight="600" font-family="Inter, sans-serif">
             SAHAJ LAYERED IMPACT RINGS
         </text>`;
-        html += `<text x="290" y="46" text-anchor="middle" font-size="11" fill="#888" font-family="Inter, sans-serif">
+        html += `<text x="290" y="46" text-anchor="middle" font-size="11" fill="${colors.textMuted}" font-family="Inter, sans-serif">
             Explorer → Strategist
         </text>`;
 
@@ -1185,15 +1210,30 @@
             html += `<text x="${labelX}" y="${labelY - 5}"
                 text-anchor="start" font-size="13" fill="${ring.color}" font-weight="600" font-family="Inter, sans-serif">${ring.name}</text>`;
             html += `<text x="${labelX}" y="${labelY + 10}"
-                text-anchor="start" font-size="10" fill="#888" font-family="Inter, sans-serif">${ring.scope}</text>`;
+                text-anchor="start" font-size="10" fill="${colors.textMuted}" font-family="Inter, sans-serif">${ring.scope}</text>`;
         });
 
         // Footer
-        html += `<text x="290" y="380" text-anchor="middle" font-size="10" fill="#999" font-style="italic" font-family="Inter, sans-serif">
+        html += `<text x="290" y="380" text-anchor="middle" font-size="10" fill="${colors.textMuted}" font-style="italic" font-family="Inter, sans-serif">
             Growth = expanding reach. Different areas mature at different speeds.
         </text>`;
 
         svg.innerHTML = html;
+    }
+
+    function refreshSvgDiagrams() {
+        // Clear and re-render SVG diagrams to pick up new theme colors
+        const radar = document.getElementById('capability-radar');
+        if (radar) {
+            radar.innerHTML = '';
+            renderCapabilityRadar();
+        }
+
+        const rings = document.getElementById('impact-rings');
+        if (rings) {
+            rings.innerHTML = '';
+            renderImpactRings();
+        }
     }
 
     // ============================================
@@ -1222,6 +1262,9 @@
             }
 
             localStorage.setItem('theme', newTheme);
+
+            // Re-render SVG diagrams with new theme colors
+            refreshSvgDiagrams();
         });
 
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
@@ -1232,6 +1275,8 @@
                 } else {
                     document.documentElement.removeAttribute('data-theme');
                 }
+                // Re-render SVG diagrams with new theme colors
+                refreshSvgDiagrams();
             }
         });
     }
