@@ -21,7 +21,7 @@ We value people who take responsibility for outcomes—technical, delivery, clie
 
 ### Consulting Mindset
 
-Sahaj engineers are expected to think like consultants: to understand problems deeply, remove ambiguity, propose solutions, and help stakeholders make better decisions. Doing what is asked without questioning unclear or risky assumptions has a natural growth ceiling.
+Sahajeevis are expected to think like consultants: to understand problems deeply, remove ambiguity, propose solutions, and help stakeholders make better decisions. Doing what is asked without questioning unclear or risky assumptions has a natural growth ceiling.
 
 ### Delivery Excellence, Not Heroics
 

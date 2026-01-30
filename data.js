@@ -26,7 +26,7 @@ const HOME = {
         },
         {
           "title": "Consulting Mindset",
-          "description": "Sahaj engineers are expected to think like consultants: to understand problems deeply, remove ambiguity, propose solutions, and help stakeholders make better decisions. Doing what is asked without questioning unclear or risky assumptions has a natural growth ceiling."
+          "description": "Sahajeevis are expected to think like consultants: to understand problems deeply, remove ambiguity, propose solutions, and help stakeholders make better decisions. Doing what is asked without questioning unclear or risky assumptions has a natural growth ceiling."
         },
         {
           "title": "Delivery Excellence, Not Heroics",
