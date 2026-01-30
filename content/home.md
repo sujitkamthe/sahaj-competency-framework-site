@@ -20,6 +20,8 @@ But this is not the only way to grow. All paths that create impact are valued. U
 
 ## How to Use This Guide
 
+<!-- usage -->
+
 This guide supports conversations, not conclusions. Use it when:
 
 - **Setting expectations**: Discuss with teammates what's expected of you, using personas as a reference point.
@@ -84,6 +86,8 @@ Growing others, building trust, and strengthening teams are not "extra" activiti
 In a culture with open conversations and open salaries, expectations must be explicit, observable, and fair.
 
 ## Key Truths
+
+<!-- key-truths -->
 
 - Delivery-only excellence has a **growth ceiling**
 - All five capabilities matter; **Consulting is where calibration is hardest** (everyone thinks they consult; few actually do)

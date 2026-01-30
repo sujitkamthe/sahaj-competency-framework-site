@@ -13,6 +13,8 @@ This is not a scorecard. The radar shows where your impact currently shows up, n
 
 ## How the Capability Areas Work Together
 
+<!-- balance -->
+
 No single capability area is sufficient on its own.
 
 - Strong **Technical Delivery** without Consulting leads to execution-only roles

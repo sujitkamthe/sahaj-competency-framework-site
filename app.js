@@ -257,26 +257,6 @@
     }
 
     // ============================================
-    // Annotation Processing
-    // ============================================
-
-    function extractAnnotations(body) {
-        const annotations = [];
-        const annotationRegex = /<!--\s*([\w-]+)(?::\s*([^\s]+))?\s*-->/g;
-        let match;
-
-        while ((match = annotationRegex.exec(body)) !== null) {
-            annotations.push({
-                type: match[1],
-                value: match[2] || null,
-                index: match.index
-            });
-        }
-
-        return annotations;
-    }
-
-    // ============================================
     // Navigation
     // ============================================
 
@@ -400,6 +380,16 @@
     // Layout Renderers
     // ============================================
 
+    // Layout registry - maps layout names to render functions
+    const layoutRenderers = {
+        'home': renderHomeLayout,
+        'personas-overview': renderPersonasOverviewLayout,
+        'capabilities-overview': renderCapabilitiesOverviewLayout,
+        'persona-detail': renderPersonaDetailLayout,
+        'capability-detail': renderCapabilityDetailLayout,
+        'markdown-page': renderMarkdownPageLayout
+    };
+
     async function renderPage(pageId, container) {
         const content = await loadContent(pageId);
         if (!content) {
@@ -407,35 +397,15 @@
             return;
         }
 
-        const layout = content.layout;
-
-        switch (layout) {
-            case 'home':
-                await renderHomeLayout(content, container);
-                break;
-            case 'personas-overview':
-                await renderPersonasOverviewLayout(content, container);
-                break;
-            case 'capabilities-overview':
-                await renderCapabilitiesOverviewLayout(content, container);
-                break;
-            case 'persona-detail':
-                await renderPersonaDetailLayout(content, container);
-                break;
-            case 'capability-detail':
-                await renderCapabilityDetailLayout(content, container);
-                break;
-            case 'markdown-page':
-                await renderMarkdownPageLayout(content, container);
-                break;
-            default:
-                container.innerHTML = '<div class="container"><h1>Unknown Layout</h1></div>';
+        const renderer = layoutRenderers[content.layout];
+        if (renderer) {
+            await renderer(content, container);
+        } else {
+            container.innerHTML = '<div class="container"><h1>Unknown Layout</h1></div>';
         }
     }
 
     async function renderHomeLayout(content, container) {
-        const annotations = extractAnnotations(content.body);
-
         let html = `
             <div class="hero">
                 <h1>${content.title}</h1>
@@ -444,77 +414,94 @@
             <div class="container">
         `;
 
-        // Parse sections from body
+        // Parse sections from body (now includes annotation info)
         const sections = parseSections(content.body);
 
         for (const section of sections) {
-            // Check for cards annotation in this section
-            const isCards = section.content.includes('<!-- cards -->');
+            const annotationType = section.annotation?.type;
 
-            if (section.title === 'What We Value' || isCards) {
-                // Parse h3 subsections as cards
-                const cards = parseCardsFromSection(section.content);
-                html += `
-                    <section class="values-section">
-                        <h2>${section.title}</h2>
-                        <div class="values-grid">
-                            ${cards.map(card => `
-                                <div class="value-card">
-                                    <h3>${card.title}</h3>
-                                    <p>${parseInlineMarkdown(card.description)}</p>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </section>
-                `;
-            } else if (section.title === 'Key Truths') {
-                const items = parseListItems(section.content);
-                html += `
-                    <section class="key-truths-section">
-                        <h2>${section.title}</h2>
-                        <ul class="key-truths-list">
-                            ${items.map(item => `<li>${parseInlineMarkdown(item)}</li>`).join('')}
-                        </ul>
-                    </section>
-                `;
-            } else if (section.title === 'How to Use This Guide') {
-                html += renderUsageSection(section);
-            } else {
-                // Generic section - paragraphs
-                const paragraphs = parseParagraphs(section.content);
-                const sectionClass = slugify(section.title) + '-section';
-                html += `
-                    <section class="${sectionClass}">
-                        <h2>${section.title}</h2>
-                        ${paragraphs.map(p => `<p>${parseInlineMarkdown(p)}</p>`).join('')}
-                    </section>
-                `;
+            switch (annotationType) {
+                case 'cards':
+                    html += renderCardsSection(section);
+                    break;
+                case 'key-truths':
+                    html += renderKeyTruthsSection(section);
+                    break;
+                case 'usage':
+                    html += renderUsageSection(section);
+                    break;
+                default:
+                    html += renderGenericSection(section);
             }
         }
 
-        // Check for explore-cards annotation
+        // Check for explore-cards annotation (standalone, not tied to a section)
         if (content.body.includes('<!-- explore-cards -->')) {
-            html += `
-                <section class="explore-section">
-                    <h2>Explore the Framework</h2>
-                    <div class="explore-grid">
-                        <a href="#personas" data-page="personas" class="explore-card">
-                            <h3>Personas</h3>
-                            <p>Understand how impact evolves from Explorer to Strategist</p>
-                            <span class="arrow">→</span>
-                        </a>
-                        <a href="#capabilities" data-page="capabilities" class="explore-card">
-                            <h3>Capability Areas</h3>
-                            <p>Explore the five dimensions of engineering impact</p>
-                            <span class="arrow">→</span>
-                        </a>
-                    </div>
-                </section>
-            `;
+            html += renderExploreCards();
         }
 
         html += `</div>`;
         container.innerHTML = html;
+    }
+
+    function renderCardsSection(section) {
+        const cards = parseCardsFromSection(section.content);
+        return `
+            <section class="values-section">
+                <h2>${section.title}</h2>
+                <div class="values-grid">
+                    ${cards.map(card => `
+                        <div class="value-card">
+                            <h3>${card.title}</h3>
+                            <p>${parseInlineMarkdown(card.description)}</p>
+                        </div>
+                    `).join('')}
+                </div>
+            </section>
+        `;
+    }
+
+    function renderKeyTruthsSection(section) {
+        const items = parseListItems(section.content);
+        return `
+            <section class="key-truths-section">
+                <h2>${section.title}</h2>
+                <ul class="key-truths-list">
+                    ${items.map(item => `<li>${parseInlineMarkdown(item)}</li>`).join('')}
+                </ul>
+            </section>
+        `;
+    }
+
+    function renderGenericSection(section) {
+        const paragraphs = parseParagraphs(section.content);
+        const sectionClass = slugify(section.title) + '-section';
+        return `
+            <section class="${sectionClass}">
+                <h2>${section.title}</h2>
+                ${paragraphs.map(p => `<p>${parseInlineMarkdown(p)}</p>`).join('')}
+            </section>
+        `;
+    }
+
+    function renderExploreCards() {
+        return `
+            <section class="explore-section">
+                <h2>Explore the Framework</h2>
+                <div class="explore-grid">
+                    <a href="#personas" data-page="personas" class="explore-card">
+                        <h3>Personas</h3>
+                        <p>Understand how impact evolves from Explorer to Strategist</p>
+                        <span class="arrow">→</span>
+                    </a>
+                    <a href="#capabilities" data-page="capabilities" class="explore-card">
+                        <h3>Capability Areas</h3>
+                        <p>Explore the five dimensions of engineering impact</p>
+                        <span class="arrow">→</span>
+                    </a>
+                </div>
+            </section>
+        `;
     }
 
     async function renderPersonasOverviewLayout(content, container) {
@@ -611,15 +598,17 @@
             html += `</div>`;
         }
 
-        // Check for balance section
-        const balanceSection = extractSection(content.body, 'How the Capability Areas Work Together');
-        if (balanceSection) {
-            html += `
-                <section class="balance-section">
-                    <h2>How the Capability Areas Work Together</h2>
-                    ${parseMarkdownToHtml(balanceSection)}
-                </section>
-            `;
+        // Render any remaining sections with annotations
+        const sections = parseSections(content.body);
+        for (const section of sections) {
+            if (section.annotation?.type === 'balance') {
+                html += `
+                    <section class="balance-section">
+                        <h2>${section.title}</h2>
+                        ${parseMarkdownToHtml(section.content)}
+                    </section>
+                `;
+            }
         }
 
         html += `</div>`;
@@ -864,7 +853,14 @@
             const title = parts[i]?.trim();
             const content = parts[i + 1];
             if (title && content) {
-                sections.push({ title, content });
+                // Extract annotation from section content (e.g., <!-- cards --> or <!-- diagram: foo -->)
+                const annotationMatch = content.match(/<!--\s*([\w-]+)(?::\s*([^\s]+))?\s*-->/);
+                const annotation = annotationMatch ? {
+                    type: annotationMatch[1],
+                    value: annotationMatch[2] || null
+                } : null;
+
+                sections.push({ title, content, annotation });
             }
         }
 
