@@ -20,6 +20,9 @@
         try {
             // Load manifest
             const response = await fetch('manifest.json');
+            if (!response.ok) {
+                throw new Error(`Failed to load manifest: ${response.status}`);
+            }
             manifest = await response.json();
 
             // Initialize UI
@@ -51,16 +54,25 @@
             return null;
         }
 
-        const response = await fetch(pageInfo.file);
-        const markdown = await response.text();
-        const parsed = parseMarkdownFile(markdown);
+        try {
+            const response = await fetch(pageInfo.file);
+            if (!response.ok) {
+                console.error(`Failed to load ${pageInfo.file}: ${response.status}`);
+                return null;
+            }
+            const markdown = await response.text();
+            const parsed = parseMarkdownFile(markdown);
 
-        contentCache[pageId] = {
-            ...pageInfo,
-            ...parsed
-        };
+            contentCache[pageId] = {
+                ...pageInfo,
+                ...parsed
+            };
 
-        return contentCache[pageId];
+            return contentCache[pageId];
+        } catch (error) {
+            console.error(`Failed to fetch content for ${pageId}:`, error);
+            return null;
+        }
     }
 
     async function loadIcon(iconPath) {
@@ -70,10 +82,17 @@
 
         try {
             const response = await fetch('content/' + iconPath);
+            if (!response.ok) {
+                console.warn(`Icon not found: ${iconPath}`);
+                iconCache[iconPath] = '';
+                return '';
+            }
             const svg = await response.text();
             iconCache[iconPath] = svg;
             return svg;
-        } catch (e) {
+        } catch (error) {
+            console.warn(`Failed to load icon ${iconPath}:`, error.message);
+            iconCache[iconPath] = '';
             return '';
         }
     }
