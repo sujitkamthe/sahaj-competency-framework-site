@@ -521,26 +521,55 @@
             `;
         }
 
+        // Check for tracks-intro annotation and render content between it and persona-cards
+        if (content.body.includes('<!-- tracks-intro -->')) {
+            const tracksIntroMatch = content.body.match(/<!-- tracks-intro -->\s*([\s\S]*?)(?=<!-- persona-cards -->|$)/);
+            if (tracksIntroMatch && tracksIntroMatch[1].trim()) {
+                html += `<div class="tracks-intro">${parseMarkdownToHtml(tracksIntroMatch[1].trim())}</div>`;
+            }
+        }
+
         // Check for persona-cards annotation
         if (content.body.includes('<!-- persona-cards -->')) {
-            html += `<div class="personas-grid">`;
+            // Group personas by level
+            const foundation = ['explorer', 'artisan', 'catalyst'];
+            const teamLevel = ['multiplier', 'amplifier'];
+            const orgLevel = ['strategist', 'pioneer'];
 
-            for (const personaId of manifest.personas) {
+            // Helper to render a persona card
+            const renderPersonaCard = async (personaId) => {
                 const persona = manifest.pages[`persona-${personaId}`];
-                // Load full persona content to get mindset
                 const personaContent = await loadContent(`persona-${personaId}`);
                 const mindset = extractMindset(personaContent.body);
-
-                html += `
+                return `
                     <a href="#persona-${persona.id}" data-page="persona-${persona.id}" class="persona-card persona-${persona.id}">
-                        <div class="persona-scope">${persona.scope}</div>
+                        <div class="persona-scope">${getScopeWithTrack(persona.id, persona.scope)}</div>
                         <h3>${persona.name}</h3>
                         <p class="persona-tagline">${persona.tagline}</p>
                         <p class="persona-mindset">"${mindset}"</p>
                     </a>
                 `;
-            }
+            };
 
+            // Foundation row (3 cards)
+            html += `<div class="personas-grid personas-grid-3">`;
+            for (const id of foundation) {
+                html += await renderPersonaCard(id);
+            }
+            html += `</div>`;
+
+            // Team-level row (2 cards - TL / IC side by side)
+            html += `<div class="personas-grid personas-grid-2">`;
+            for (const id of teamLevel) {
+                html += await renderPersonaCard(id);
+            }
+            html += `</div>`;
+
+            // Org-level row (2 cards - TL / IC side by side)
+            html += `<div class="personas-grid personas-grid-2">`;
+            for (const id of orgLevel) {
+                html += await renderPersonaCard(id);
+            }
             html += `</div>`;
         }
 
@@ -635,10 +664,13 @@
         const successLooksLike = extractListSection(content.body, 'Success Looks Like');
         const explicitExpectation = extractListSection(content.body, 'Explicit Expectation');
 
+        const borderStyle = getPersonaBorderStyle(personaId, content.color);
+        const borderClass = getPersonaBorderClass(personaId);
+
         let html = `
             <div class="container">
-                <div class="detail-header" style="border-left: 4px solid ${content.color}; padding-left: var(--space-lg);">
-                    <div class="persona-scope">${content.scope}</div>
+                <div class="detail-header ${borderClass}" style="${borderStyle} padding-left: var(--space-lg);">
+                    <div class="persona-scope">${getScopeWithTrack(personaId, content.scope)}</div>
                     <h1>${content.name}</h1>
                     <p class="detail-subtitle">${content.tagline}</p>
                     <p class="detail-mindset">"${mindset}"</p>
@@ -766,12 +798,14 @@
             const trustedQuestion = extractTrustedQuestion(personaContent.body);
 
             if (persona && expectations) {
+                const pBorderStyle = getPersonaBorderStyle(pId, persona.color);
+                const pBorderClass = getPersonaBorderClass(pId);
                 html += `
                     <div class="persona-content ${i === 0 ? 'active' : ''}" data-persona="${pId}">
-                        <div class="capability-section" style="border-left: 4px solid ${persona.color}; margin-left: 0; border-radius: 0 var(--radius-lg) var(--radius-lg) 0;">
+                        <div class="capability-section ${pBorderClass}" style="${pBorderStyle} margin-left: 0; border-radius: 0 var(--radius-lg) var(--radius-lg) 0;">
                             <div style="display: flex; align-items: baseline; gap: var(--space-md); margin-bottom: var(--space-lg);">
                                 <h3 style="border: none; padding: 0; margin: 0;">${persona.name}</h3>
-                                <span style="color: var(--color-text-muted); font-size: 0.9rem;">${persona.scope}</span>
+                                <span style="color: var(--color-text-muted); font-size: 0.9rem;">${getScopeWithTrack(pId, persona.scope)}</span>
                             </div>
                             <p style="font-style: italic; color: var(--color-text-secondary); margin-bottom: ${trustedQuestion ? 'var(--space-sm)' : 'var(--space-lg)'};">"${mindset}"</p>
                             ${trustedQuestion ? `<p style="color: var(--color-text-secondary); margin-bottom: var(--space-lg); font-size: 0.9rem;"><strong>The question you're trusted to answer:</strong> "${trustedQuestion}"</p>` : ''}
@@ -887,9 +921,11 @@
             const antiPatterns = personaSections[pId];
 
             if (persona && antiPatterns) {
+                const apBorderStyle = getPersonaBorderStyle(pId, persona.color);
+                const apBorderClass = getPersonaBorderClass(pId);
                 html += `
                     <div class="persona-content ${i === 0 ? 'active' : ''}" data-persona="${pId}">
-                        <div class="anti-pattern-card" style="border-left: 4px solid ${persona.color};">
+                        <div class="anti-pattern-card ${apBorderClass}" style="${apBorderStyle}">
                             <div class="anti-pattern-header">
                                 <h3>${persona.name}</h3>
                                 <span class="anti-pattern-motto">${antiPatterns.motto}</span>
@@ -1237,13 +1273,52 @@
             artisan: styles.getPropertyValue('--color-artisan').trim(),
             catalyst: styles.getPropertyValue('--color-catalyst').trim(),
             multiplier: styles.getPropertyValue('--color-multiplier').trim(),
-            strategist: styles.getPropertyValue('--color-strategist').trim()
+            strategist: styles.getPropertyValue('--color-strategist').trim(),
+            amplifier: styles.getPropertyValue('--color-amplifier').trim(),
+            pioneer: styles.getPropertyValue('--color-pioneer').trim()
         };
     }
 
     function getPersonaColor(personaId) {
         const colors = getSvgColors();
         return colors[personaId] || '#888';
+    }
+
+    // Check if a persona is on the IC track
+    function isIcTrack(personaId) {
+        return personaId === 'amplifier' || personaId === 'pioneer';
+    }
+
+    // Get border style for persona (inline style for TL, class-based for IC)
+    function getPersonaBorderStyle(personaId, color) {
+        if (isIcTrack(personaId)) {
+            return ''; // IC track uses CSS class for diagonal stripes
+        }
+        return `border-left: 4px solid ${color};`;
+    }
+
+    // Get border class for persona
+    function getPersonaBorderClass(personaId) {
+        if (isIcTrack(personaId)) {
+            return `ic-track-border persona-${personaId}-border`;
+        }
+        return '';
+    }
+
+    // Check if a persona is on the Tech Leadership track
+    function isTechLeadershipTrack(personaId) {
+        return personaId === 'multiplier' || personaId === 'strategist';
+    }
+
+    // Get scope label with track suffix for forked personas
+    function getScopeWithTrack(personaId, scope) {
+        if (isIcTrack(personaId)) {
+            return `${scope} (IC Track)`;
+        }
+        if (isTechLeadershipTrack(personaId)) {
+            return `${scope} (TL Track)`;
+        }
+        return scope; // Foundation personas don't need a track label
     }
 
     function renderCapabilityRadar() {
@@ -1327,59 +1402,124 @@
         const cx = 200;
         const cy = 200;
 
-        // Build rings from manifest using theme-aware colors
-        const personas = manifest.personas.map(id => manifest.pages[`persona-${id}`]);
+        // Foundation personas (shared path) - these get full rings
+        const foundationIds = ['explorer', 'artisan', 'catalyst'];
+        // Post-fork personas - shown as paired labels
+        const teamLevelPair = { mgmt: 'multiplier', ic: 'amplifier' };
+        const orgLevelPair = { mgmt: 'strategist', ic: 'pioneer' };
+
         const baseRadius = 32;
         const radiusStep = 24;
 
-        const rings = personas.map((p, i) => ({
-            name: p.name,
-            scope: p.scope.replace(' impact', ''),
-            radius: baseRadius + (i * radiusStep),
-            color: getPersonaColor(p.id)
-        }));
+        // Build foundation rings
+        const foundationRings = foundationIds.map((id, i) => {
+            const p = manifest.pages[`persona-${id}`];
+            return {
+                id: id,
+                name: p.name,
+                scope: p.scope.replace(' impact', ''),
+                radius: baseRadius + (i * radiusStep),
+                color: getPersonaColor(id)
+            };
+        });
+
+        // Build post-fork ring data (rings 4 and 5)
+        const teamLevelRadius = baseRadius + (3 * radiusStep);
+        const orgLevelRadius = baseRadius + (4 * radiusStep);
+
+        const teamMgmt = manifest.pages[`persona-${teamLevelPair.mgmt}`];
+        const teamIc = manifest.pages[`persona-${teamLevelPair.ic}`];
+        const orgMgmt = manifest.pages[`persona-${orgLevelPair.mgmt}`];
+        const orgIc = manifest.pages[`persona-${orgLevelPair.ic}`];
 
         let html = '';
 
         // Title
         html += `<text x="290" y="28" text-anchor="middle" font-size="13" fill="${colors.text}" font-weight="600" font-family="Inter, sans-serif">
-            SAHAJ LAYERED IMPACT RINGS
+            SAHAJ GROWTH PATHS
         </text>`;
         html += `<text x="290" y="46" text-anchor="middle" font-size="11" fill="${colors.textMuted}" font-family="Inter, sans-serif">
-            Explorer → Strategist
+            Foundation → Two Tracks
         </text>`;
 
-        // Draw rings (outside in)
-        for (let i = rings.length - 1; i >= 0; i--) {
-            const ring = rings[i];
+        // Draw outer rings for the forked levels (using blended/neutral colors)
+        // Team-level ring (Multiplier / Amplifier)
+        const teamColor = getPersonaColor(teamLevelPair.mgmt);
+        html += `<circle cx="${cx}" cy="${cy}" r="${teamLevelRadius}"
+            fill="${teamColor}" fill-opacity="0.08"
+            stroke="${teamColor}" stroke-width="2" stroke-dasharray="8,4"/>`;
+
+        // Org-level ring (Strategist / Pioneer)
+        const orgColor = getPersonaColor(orgLevelPair.mgmt);
+        html += `<circle cx="${cx}" cy="${cy}" r="${orgLevelRadius}"
+            fill="${orgColor}" fill-opacity="0.08"
+            stroke="${orgColor}" stroke-width="2" stroke-dasharray="8,4"/>`;
+
+        // Draw foundation rings (solid, inside-out)
+        for (let i = foundationRings.length - 1; i >= 0; i--) {
+            const ring = foundationRings[i];
             html += `<circle cx="${cx}" cy="${cy}" r="${ring.radius}"
                 fill="${ring.color}" fill-opacity="0.12"
                 stroke="${ring.color}" stroke-width="2.5"/>`;
         }
 
-        // Labels
-        const labelYPositions = [85, 135, 185, 235, 285];
+        // Labels section
         const labelX = 400;
 
-        rings.forEach((ring, index) => {
+        // Foundation labels (rings 1-3)
+        const foundationLabelYPositions = [100, 145, 190];
+        foundationRings.forEach((ring, index) => {
             const ringX = cx + ring.radius;
             const ringY = cy;
-            const labelY = labelYPositions[index];
+            const labelY = foundationLabelYPositions[index];
             const bendX = 350;
 
             html += `<path d="M ${ringX} ${ringY} L ${bendX} ${ringY} L ${bendX} ${labelY} L ${labelX - 8} ${labelY}"
                 fill="none" stroke="${ring.color}" stroke-width="1.5" stroke-opacity="0.5"/>`;
             html += `<circle cx="${ringX}" cy="${ringY}" r="4" fill="${ring.color}"/>`;
             html += `<circle cx="${labelX - 8}" cy="${labelY}" r="3" fill="${ring.color}"/>`;
-            html += `<text x="${labelX}" y="${labelY - 5}"
-                text-anchor="start" font-size="13" fill="${ring.color}" font-weight="600" font-family="Inter, sans-serif">${ring.name}</text>`;
-            html += `<text x="${labelX}" y="${labelY + 10}"
-                text-anchor="start" font-size="10" fill="${colors.textMuted}" font-family="Inter, sans-serif">${ring.scope}</text>`;
+            html += `<text x="${labelX}" y="${labelY - 5}" text-anchor="start" font-size="13" fill="${ring.color}" font-weight="600" font-family="Inter, sans-serif">${ring.name}</text>`;
+            html += `<text x="${labelX}" y="${labelY + 10}" text-anchor="start" font-size="10" fill="${colors.textMuted}" font-family="Inter, sans-serif">${ring.scope}</text>`;
         });
 
+        // Team-level label (Multiplier / Amplifier)
+        const teamLabelY = 240;
+        const teamRingX = cx + teamLevelRadius;
+        html += `<path d="M ${teamRingX} ${cy} L 350 ${cy} L 350 ${teamLabelY} L ${labelX - 8} ${teamLabelY}"
+            fill="none" stroke="${teamColor}" stroke-width="1.5" stroke-opacity="0.5"/>`;
+        html += `<circle cx="${teamRingX}" cy="${cy}" r="4" fill="${teamColor}"/>`;
+        html += `<circle cx="${labelX - 8}" cy="${teamLabelY}" r="3" fill="${teamColor}"/>`;
+        html += `<text x="${labelX}" y="${teamLabelY - 5}" text-anchor="start" font-size="13" font-weight="600" font-family="Inter, sans-serif">
+            <tspan fill="${getPersonaColor(teamLevelPair.mgmt)}">${teamMgmt.name}</tspan>
+            <tspan fill="${colors.textMuted}"> / </tspan>
+            <tspan fill="${getPersonaColor(teamLevelPair.ic)}">${teamIc.name}</tspan>
+        </text>`;
+        html += `<text x="${labelX}" y="${teamLabelY + 10}" text-anchor="start" font-size="10" fill="${colors.textMuted}" font-family="Inter, sans-serif">Team-level</text>`;
+
+        // Org-level label (Strategist / Pioneer)
+        const orgLabelY = 290;
+        const orgRingX = cx + orgLevelRadius;
+        html += `<path d="M ${orgRingX} ${cy} L 350 ${cy} L 350 ${orgLabelY} L ${labelX - 8} ${orgLabelY}"
+            fill="none" stroke="${orgColor}" stroke-width="1.5" stroke-opacity="0.5"/>`;
+        html += `<circle cx="${orgRingX}" cy="${cy}" r="4" fill="${orgColor}"/>`;
+        html += `<circle cx="${labelX - 8}" cy="${orgLabelY}" r="3" fill="${orgColor}"/>`;
+        html += `<text x="${labelX}" y="${orgLabelY - 5}" text-anchor="start" font-size="13" font-weight="600" font-family="Inter, sans-serif">
+            <tspan fill="${getPersonaColor(orgLevelPair.mgmt)}">${orgMgmt.name}</tspan>
+            <tspan fill="${colors.textMuted}"> / </tspan>
+            <tspan fill="${getPersonaColor(orgLevelPair.ic)}">${orgIc.name}</tspan>
+        </text>`;
+        html += `<text x="${labelX}" y="${orgLabelY + 10}" text-anchor="start" font-size="10" fill="${colors.textMuted}" font-family="Inter, sans-serif">Org-level</text>`;
+
+        // Legend for tracks
+        html += `<text x="290" y="345" text-anchor="middle" font-size="10" fill="${colors.textMuted}" font-family="Inter, sans-serif">
+            <tspan fill="${getPersonaColor('multiplier')}">TL Track</tspan>
+            <tspan> / </tspan>
+            <tspan fill="${getPersonaColor('amplifier')}">IC Track</tspan>
+        </text>`;
+
         // Footer
-        html += `<text x="290" y="380" text-anchor="middle" font-size="10" fill="${colors.textMuted}" font-style="italic" font-family="Inter, sans-serif">
-            Growth = expanding reach. Different areas mature at different speeds.
+        html += `<text x="290" y="365" text-anchor="middle" font-size="10" fill="${colors.textMuted}" font-style="italic" font-family="Inter, sans-serif">
+            Two paths to scale impact. Both equally valued.
         </text>`;
 
         svg.innerHTML = html;

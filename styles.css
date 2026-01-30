@@ -29,6 +29,9 @@
     --color-catalyst: #2D8FE5;
     --color-multiplier: #E86A50;
     --color-strategist: #4A5568;
+    /* IC track personas (hue-shifted from management counterparts) */
+    --color-amplifier: #E8A050;  /* warm orange-gold, hue-shifted from Multiplier's coral */
+    --color-pioneer: #6A7A8A;    /* cool blue-gray, hue-shifted from Strategist's neutral */
 
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-mono: 'SF Mono', Monaco, 'Cascadia Code', monospace;
@@ -77,6 +80,9 @@
     --color-catalyst: #5AA8F0;
     --color-multiplier: #F08A70;
     --color-strategist: #9CA3B0;
+    /* IC track personas (hue-shifted from management counterparts) */
+    --color-amplifier: #F0B070;  /* brighter warm gold for dark mode */
+    --color-pioneer: #9AAABB;    /* brighter cool blue-gray for dark mode */
 
     --shadow-sm: 0 2px 8px rgba(0,0,0,0.25);
     --shadow-md: 0 4px 16px rgba(0,0,0,0.35);
@@ -411,12 +417,32 @@ li {
 .dropdown-menu .persona-link[data-page="persona-catalyst"]::before { background: var(--color-catalyst); }
 .dropdown-menu .persona-link[data-page="persona-multiplier"]::before { background: var(--color-multiplier); }
 .dropdown-menu .persona-link[data-page="persona-strategist"]::before { background: var(--color-strategist); }
+.dropdown-menu .persona-link[data-page="persona-amplifier"]::before {
+    background: repeating-linear-gradient(
+        -45deg,
+        var(--color-amplifier),
+        var(--color-amplifier) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+}
+.dropdown-menu .persona-link[data-page="persona-pioneer"]::before {
+    background: repeating-linear-gradient(
+        -45deg,
+        var(--color-pioneer),
+        var(--color-pioneer) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+}
 
 .dropdown-menu .persona-link[data-page="persona-explorer"]:hover { color: var(--color-explorer); }
 .dropdown-menu .persona-link[data-page="persona-artisan"]:hover { color: var(--color-artisan); }
 .dropdown-menu .persona-link[data-page="persona-catalyst"]:hover { color: var(--color-catalyst); }
 .dropdown-menu .persona-link[data-page="persona-multiplier"]:hover { color: var(--color-multiplier); }
 .dropdown-menu .persona-link[data-page="persona-strategist"]:hover { color: var(--color-strategist); }
+.dropdown-menu .persona-link[data-page="persona-amplifier"]:hover { color: var(--color-amplifier); }
+.dropdown-menu .persona-link[data-page="persona-pioneer"]:hover { color: var(--color-pioneer); }
 
 /* Capability icons in dropdown */
 .dropdown-menu .capability-link {
@@ -558,6 +584,24 @@ li {
     color: var(--color-text-secondary);
     max-width: 800px;
     margin-bottom: var(--space-2xl);
+}
+
+.tracks-intro {
+    margin: var(--space-2xl) 0;
+}
+
+.tracks-intro p {
+    margin-bottom: var(--space-md);
+    color: var(--color-text-secondary);
+}
+
+.tracks-intro p:last-child {
+    margin-bottom: 0;
+}
+
+.tracks-intro em {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
 }
 
 /* Values Grid */
@@ -721,9 +765,27 @@ blockquote p {
 /* Personas Grid */
 .personas-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: var(--space-xl);
     margin-top: var(--space-2xl);
+}
+
+.personas-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.personas-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 66.66%;
+}
+
+@media (max-width: 900px) {
+    .personas-grid-3 {
+        grid-template-columns: 1fr;
+    }
+    .personas-grid-2 {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+    }
 }
 
 .persona-card {
@@ -747,12 +809,76 @@ blockquote p {
 .persona-catalyst { border-left-color: var(--color-catalyst); }
 .persona-multiplier { border-left-color: var(--color-multiplier); }
 .persona-strategist { border-left-color: var(--color-strategist); }
+/* IC track personas - diagonal stripe border to distinguish from TL track */
+.persona-amplifier,
+.persona-pioneer {
+    border-left-color: transparent;
+    position: relative;
+}
+
+.persona-amplifier::before,
+.persona-pioneer::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+    background: repeating-linear-gradient(
+        -45deg,
+        var(--stripe-color),
+        var(--stripe-color) 4px,
+        transparent 4px,
+        transparent 8px
+    );
+}
+
+.persona-amplifier::before {
+    --stripe-color: var(--color-amplifier);
+}
+
+.persona-pioneer::before {
+    --stripe-color: var(--color-pioneer);
+}
+
+/* IC track border class for detail pages and other contexts */
+.ic-track-border {
+    position: relative;
+    border-left-color: transparent !important;
+}
+
+.ic-track-border::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: repeating-linear-gradient(
+        -45deg,
+        var(--stripe-color),
+        var(--stripe-color) 4px,
+        transparent 4px,
+        transparent 8px
+    );
+}
+
+.persona-amplifier-border::before {
+    --stripe-color: var(--color-amplifier);
+}
+
+.persona-pioneer-border::before {
+    --stripe-color: var(--color-pioneer);
+}
 
 .persona-explorer:hover { background: linear-gradient(135deg, rgba(124,92,219,0.04) 0%, var(--color-surface) 100%); }
 .persona-artisan:hover { background: linear-gradient(135deg, rgba(12,170,143,0.04) 0%, var(--color-surface) 100%); }
 .persona-catalyst:hover { background: linear-gradient(135deg, rgba(45,143,229,0.04) 0%, var(--color-surface) 100%); }
 .persona-multiplier:hover { background: linear-gradient(135deg, rgba(232,106,80,0.04) 0%, var(--color-surface) 100%); }
 .persona-strategist:hover { background: linear-gradient(135deg, rgba(74,85,104,0.04) 0%, var(--color-surface) 100%); }
+.persona-amplifier:hover { background: linear-gradient(135deg, rgba(232,160,80,0.04) 0%, var(--color-surface) 100%); }
+.persona-pioneer:hover { background: linear-gradient(135deg, rgba(106,122,138,0.04) 0%, var(--color-surface) 100%); }
 
 .persona-scope {
     font-size: 0.8rem;
@@ -868,7 +994,7 @@ blockquote p {
 
 .radar-svg,
 .impact-rings-svg {
-    max-width: 500px;
+    max-width: 580px;
     width: 100%;
     height: auto;
 }
@@ -1045,6 +1171,28 @@ blockquote p {
 .persona-tab.active {
     background: var(--color-accent);
     color: white;
+}
+
+/* IC track persona tabs with diagonal stripes */
+.persona-tab[data-persona="amplifier"],
+.persona-tab[data-persona="pioneer"] {
+    position: relative;
+    overflow: hidden;
+}
+
+.persona-tab[data-persona="amplifier"]::before,
+.persona-tab[data-persona="pioneer"]::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 3px,
+        rgba(255, 255, 255, 0.15) 3px,
+        rgba(255, 255, 255, 0.15) 6px
+    );
+    pointer-events: none;
 }
 
 .persona-content {

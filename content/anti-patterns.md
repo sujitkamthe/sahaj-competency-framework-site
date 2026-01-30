@@ -65,7 +65,7 @@ Use this section when **setting expectations** (are we being realistic?) and whe
 - Others still rely on you to connect dots
 - Improvements don't survive beyond the project
 
-**Signal:** If these patterns apply, Catalyst-level expectations are more realistic than Multiplier.
+**Signal:** If these patterns apply, Catalyst-level expectations are more realistic than Multiplier or Amplifier.
 
 ## Multiplier Anti-Patterns
 
@@ -87,6 +87,26 @@ Use this section when **setting expectations** (are we being realistic?) and whe
 
 **Signal:** If these patterns apply, Multiplier-level expectations are more realistic than Strategist.
 
+## Amplifier Anti-Patterns
+
+**Motto:** "Building Tools ≠ Scaling Impact"
+
+### Signs expectations may be too high:
+
+- Creating platforms or tools that solve your own problems, not the team's
+- Building systems that require your involvement to maintain or evolve
+- Confusing technical sophistication with actual adoption
+- Writing documentation that clarifies for you but not for others
+- Automating without measuring whether it actually saves time
+
+### Red flags:
+
+- Tools exist but aren't used consistently by the team
+- Standards you set require constant enforcement
+- Your artifacts need you to explain them
+
+**Signal:** If these patterns apply, Catalyst-level expectations are more realistic than Amplifier.
+
 ## Strategist Anti-Patterns
 
 **Motto:** "Direction Setting ≠ Durable Strategy"
@@ -106,6 +126,26 @@ Use this section when **setting expectations** (are we being realistic?) and whe
 - Results lag despite clear messaging
 
 **Signal:** If these patterns apply, Multiplier-level expectations may be more realistic than Strategist.
+
+## Pioneer Anti-Patterns
+
+**Motto:** "Visibility ≠ Influence"
+
+### Signs expectations may be too high:
+
+- Speaking at events without changing how others think or work
+- Writing thought leadership that impresses but doesn't get applied
+- Building external reputation disconnected from internal contribution
+- Confusing personal brand with organisational impact
+- Innovating in isolation without bringing others along
+
+### Red flags:
+
+- External recognition exceeds internal reliance
+- Ideas are admired but not adopted
+- Innovation doesn't translate to capability others can use
+
+**Signal:** If these patterns apply, Amplifier-level expectations are more realistic than Pioneer.
 
 ## Universal Warning Signs
 
