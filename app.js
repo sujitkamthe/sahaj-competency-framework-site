@@ -387,7 +387,8 @@
         'capabilities-overview': renderCapabilitiesOverviewLayout,
         'persona-detail': renderPersonaDetailLayout,
         'capability-detail': renderCapabilityDetailLayout,
-        'markdown-page': renderMarkdownPageLayout
+        'markdown-page': renderMarkdownPageLayout,
+        'anti-patterns': renderAntiPatternsLayout
     };
 
     async function renderPage(pageId, container) {
@@ -838,6 +839,164 @@
                 ${parseMarkdownToHtml(content.body)}
             </div>
         `;
+    }
+
+    async function renderAntiPatternsLayout(content, container) {
+        // Get intro text (before first H2)
+        const introText = getIntroText(content.body);
+
+        // Parse all H2 sections
+        const sections = parseSections(content.body);
+
+        // Separate persona sections from universal sections
+        const personaSections = {};
+        let universalWarnings = null;
+        let finalSelfCheck = null;
+
+        for (const section of sections) {
+            if (section.title.includes('Anti-Patterns')) {
+                // Extract persona name (e.g., "Explorer Anti-Patterns" -> "explorer")
+                const personaName = section.title.replace(' Anti-Patterns', '').toLowerCase();
+                personaSections[personaName] = parseAntiPatternSection(section.content);
+            } else if (section.title === 'Universal Warning Signs') {
+                universalWarnings = section.content;
+            } else if (section.title === 'Final Self-Check') {
+                finalSelfCheck = section.content;
+            }
+        }
+
+        let html = `
+            <div class="container anti-patterns-page">
+                <h1>${content.title}</h1>
+                <p class="page-intro">${parseInlineMarkdown(introText)}</p>
+
+                <div class="persona-tabs">
+                    ${manifest.personas.map((pId, index) => {
+                        const persona = manifest.pages[`persona-${pId}`];
+                        return `<button class="persona-tab ${index === 0 ? 'active' : ''}" data-persona="${pId}">${persona.name}</button>`;
+                    }).join('')}
+                </div>
+
+                <div class="persona-contents">
+        `;
+
+        // Render each persona's anti-patterns
+        for (let i = 0; i < manifest.personas.length; i++) {
+            const pId = manifest.personas[i];
+            const persona = manifest.pages[`persona-${pId}`];
+            const antiPatterns = personaSections[pId];
+
+            if (persona && antiPatterns) {
+                html += `
+                    <div class="persona-content ${i === 0 ? 'active' : ''}" data-persona="${pId}">
+                        <div class="anti-pattern-card" style="border-left: 4px solid ${persona.color};">
+                            <div class="anti-pattern-header">
+                                <h3>${persona.name}</h3>
+                                <span class="anti-pattern-motto">${antiPatterns.motto}</span>
+                            </div>
+
+                            <div class="anti-pattern-grid">
+                                <div class="anti-pattern-section">
+                                    <h4>⚠️ Signs expectations may be too high</h4>
+                                    <ul>
+                                        ${antiPatterns.signs.map(s => `<li>${parseInlineMarkdown(s)}</li>`).join('')}
+                                    </ul>
+                                </div>
+
+                                <div class="anti-pattern-section red-flags">
+                                    <h4>🚩 Red flags</h4>
+                                    <ul>
+                                        ${antiPatterns.redFlags.map(r => `<li>${parseInlineMarkdown(r)}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="anti-pattern-signal">
+                                <strong>Signal:</strong> ${parseInlineMarkdown(antiPatterns.signal)}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        html += `</div>`;
+
+        // Add universal sections
+        if (universalWarnings) {
+            html += `
+                <section class="universal-warnings">
+                    <h2>Universal Warning Signs</h2>
+                    ${parseMarkdownToHtml(universalWarnings)}
+                </section>
+            `;
+        }
+
+        if (finalSelfCheck) {
+            html += `
+                <section class="final-self-check">
+                    <h2>Final Self-Check</h2>
+                    ${parseMarkdownToHtml(finalSelfCheck)}
+                </section>
+            `;
+        }
+
+        html += `</div>`;
+        container.innerHTML = html;
+
+        // Add tab switching
+        const tabs = container.querySelectorAll('.persona-tab');
+        const contents = container.querySelectorAll('.persona-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const targetPersona = this.getAttribute('data-persona');
+
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+
+                this.classList.add('active');
+                container.querySelector(`.persona-content[data-persona="${targetPersona}"]`)?.classList.add('active');
+            });
+        });
+    }
+
+    function parseAntiPatternSection(content) {
+        const result = {
+            motto: '',
+            signs: [],
+            redFlags: [],
+            signal: ''
+        };
+
+        // Extract motto
+        const mottoMatch = content.match(/\*\*Motto:\*\*\s*"([^"]+)"/);
+        if (mottoMatch) {
+            result.motto = mottoMatch[1];
+        }
+
+        // Split by H3 sections
+        const h3Regex = /^### (.+)$/gm;
+        const parts = content.split(h3Regex);
+
+        for (let i = 1; i < parts.length; i += 2) {
+            const heading = parts[i]?.trim();
+            const sectionContent = parts[i + 1];
+
+            if (heading?.includes('Signs expectations may be too high')) {
+                result.signs = parseListItems(sectionContent);
+            } else if (heading?.includes('Red flags')) {
+                result.redFlags = parseListItems(sectionContent);
+            }
+        }
+
+        // Extract signal
+        const signalMatch = content.match(/\*\*Signal:\*\*\s*(.+?)(?:\n|$)/);
+        if (signalMatch) {
+            result.signal = signalMatch[1].trim();
+        }
+
+        return result;
     }
 
     // ============================================

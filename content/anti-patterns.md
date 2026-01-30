@@ -1,5 +1,5 @@
 ---
-layout: markdown-page
+layout: anti-patterns
 title: Persona Anti-Patterns
 ---
 
