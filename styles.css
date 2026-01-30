@@ -913,6 +913,20 @@ blockquote p {
     margin: 0;
 }
 
+.detail-mindset + .detail-trusted-question {
+    margin-top: calc(-1 * var(--radius-md));
+    padding-top: calc(var(--space-md) + var(--radius-md));
+}
+
+.detail-trusted-question {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    padding: var(--space-md) var(--space-lg);
+    background: var(--color-border-light);
+    border-radius: var(--radius-md);
+    margin: 0;
+}
+
 /* Impact/Nature Lists */
 .impact-info {
     display: grid;

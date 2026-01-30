@@ -640,6 +640,7 @@
         const nextPersona = nextPersonaId ? manifest.pages[`persona-${nextPersonaId}`] : null;
 
         const mindset = extractMindset(content.body);
+        const trustedQuestion = extractTrustedQuestion(content.body);
         const natureOfImpact = extractListSection(content.body, 'Nature of Impact');
         const successLooksLike = extractListSection(content.body, 'Success Looks Like');
         const explicitExpectation = extractListSection(content.body, 'Explicit Expectation');
@@ -651,6 +652,7 @@
                     <h1>${content.name}</h1>
                     <p class="detail-subtitle">${content.tagline}</p>
                     <p class="detail-mindset">"${mindset}"</p>
+                    ${trustedQuestion ? `<p class="detail-trusted-question"><strong>The question you're trusted to answer:</strong> "${trustedQuestion}"</p>` : ''}
                 </div>
 
                 <div class="impact-info">
@@ -771,6 +773,7 @@
             const capabilitySections = extractCapabilitySections(personaContent.body);
             const expectations = capabilitySections[content.name];
             const mindset = extractMindset(personaContent.body);
+            const trustedQuestion = extractTrustedQuestion(personaContent.body);
 
             if (persona && expectations) {
                 html += `
@@ -780,7 +783,8 @@
                                 <h3 style="border: none; padding: 0; margin: 0;">${persona.name}</h3>
                                 <span style="color: var(--color-text-muted); font-size: 0.9rem;">${persona.scope}</span>
                             </div>
-                            <p style="font-style: italic; color: var(--color-text-secondary); margin-bottom: var(--space-lg);">"${mindset}"</p>
+                            <p style="font-style: italic; color: var(--color-text-secondary); margin-bottom: ${trustedQuestion ? 'var(--space-sm)' : 'var(--space-lg)'};">"${mindset}"</p>
+                            ${trustedQuestion ? `<p style="color: var(--color-text-secondary); margin-bottom: var(--space-lg); font-size: 0.9rem;"><strong>The question you're trusted to answer:</strong> "${trustedQuestion}"</p>` : ''}
                             <ul class="expectations-list">
                                 ${expectations.expectations.map(item => `<li>${item}</li>`).join('')}
                             </ul>
@@ -982,6 +986,11 @@
 
     function extractMindset(body) {
         const match = body.match(/## Mindset\s*\n\s*"([^"]+)"/);
+        return match ? match[1] : '';
+    }
+
+    function extractTrustedQuestion(body) {
+        const match = body.match(/\*\*The question you're trusted to answer:\*\*\s*"([^"]+)"/);
         return match ? match[1] : '';
     }
 
